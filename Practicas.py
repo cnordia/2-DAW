@@ -120,3 +120,28 @@ else:
     
 """
 
+#chr(i): Nos devuelve el carácter Unicode que representa el código i.
+
+#Crear un programa que lea por teclado una cadena y un carácter, e inserte el 
+#carácter entre cada letra de la cadena. Ej: separar y , debería devolver s,e,p,a,r,a,r
+"""
+cadena = input("Introduce una cadena ")
+caracter = input ("Introduce un caracter ")
+print(caracter.join(cadena))
+"""
+
+#Crear un programa que lea por teclado una cadena y un carácter, y reemplace todos los dígitos 
+#en la cadena por el carácter. Ej: su clave es: 1540 y X debería devolver su clave es: XXXX
+"""
+cadena = str(input("Introduce una cadena "))
+caracter = input ("Introduce un caracter ")
+
+print(len(cadena)*caracter)
+"""
+
+#Crea un programa python que lea una cadena de caracteres y muestre la siguiente información:
+#-La primera letra de cada palabra. Por ejemplo, si recibe Universal Serial Bus debe devolver USB.
+#-Dicha cadena con la primera letra de cada palabra en mayúsculas. Por ejemplo, si recibe república argentina debe devolver República Argentina.
+#-Las palabras que comiencen con la letra A. Por ejemplo, si recibe Antes de ayer debe devolver Antes ayer.
+cadena = str(input("Introduce una cadena "))
+
