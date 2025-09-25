@@ -144,4 +144,15 @@ print(len(cadena)*caracter)
 #-Dicha cadena con la primera letra de cada palabra en mayúsculas. Por ejemplo, si recibe república argentina debe devolver República Argentina.
 #-Las palabras que comiencen con la letra A. Por ejemplo, si recibe Antes de ayer debe devolver Antes ayer.
 cadena = str(input("Introduce una cadena "))
+list= cadena.split()
+for i in list:
+    print(i[0],end=" ")
+print()
+
+print(cadena.title())
+
+for i in list:
+    if i[0] == "a" or i[0] == "A":
+        print(i, end=" ")
+print()
 
