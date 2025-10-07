@@ -1,0 +1,52 @@
+[
+  {
+    "titulo": "Cien años de soledad",
+    "autor": "Gabriel García Márquez",
+    "anio": 1967,
+    "genero": "Novela",
+    "prestamos": {
+      "Juan": 2
+    }
+  },
+  {
+    "titulo": "El Quijote",
+    "autor": "Miguel de Cervantes",
+    "anio": 1605,
+    "genero": "Novela",
+    "prestamos": {
+      "Pepe": 1,
+      "Luis": 1
+    }
+  },
+  {
+    "titulo": "1984",
+    "autor": "George Orwell",
+    "anio": 1949,
+    "genero": "Novela",
+    "prestamos": {
+      "Carlos": 1,
+      "JI": 2
+    }
+  },
+  {
+    "titulo": "Historia de España",
+    "autor": "David de Vega",
+    "anio": 2001,
+    "genero": "Novela",
+    "prestamos": {
+      "Miguel": 2,
+      "Luis": 1,
+      "Paco": 1
+    }
+  },
+  {
+    "titulo": "Recetas",
+    "autor": "Carlos Norte",
+    "anio": 2020,
+    "genero": "Manual",
+    "prestamos": {
+      "Dani": 2,
+      "Carlos": 1
+    }
+  }
+]

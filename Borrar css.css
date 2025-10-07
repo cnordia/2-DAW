@@ -1,0 +1,46 @@
+body{
+    width: 400px;
+    border: 1px solid;
+    height: 100%;
+
+}
+
+header{
+    display: block;
+    background-color:greenyellow;
+    text-align: center;
+    padding: 10px;
+
+}
+
+nav{
+    float: left;
+    background-color: pink;
+    margin-right:5px;
+    text-align: center;
+
+}
+
+main{
+    padding: 10px;
+    display: inline-block;
+    background-color: sandybrown;
+    border: solid 2px red;
+    clear: both;
+    
+
+}
+
+article{
+    padding: 10px;
+    background-color: skyblue;
+    margin: 3px;
+
+}
+
+footer{
+    clear:both;
+    background-color: silver;
+    text-align: center;
+    padding: 10px;
+}
