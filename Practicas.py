@@ -143,10 +143,11 @@ print(len(cadena)*caracter)
 #-La primera letra de cada palabra. Por ejemplo, si recibe Universal Serial Bus debe devolver USB.
 #-Dicha cadena con la primera letra de cada palabra en mayúsculas. Por ejemplo, si recibe república argentina debe devolver República Argentina.
 #-Las palabras que comiencen con la letra A. Por ejemplo, si recibe Antes de ayer debe devolver Antes ayer.
+"""
 cadena = str(input("Introduce una cadena "))
 list= cadena.split()
 for i in list:
-    print(i[0],end=" ")
+    print(i[0],end=" ")g
 print()
 
 print(cadena.title())
@@ -155,4 +156,26 @@ for i in list:
     if i[0] == "a" or i[0] == "A":
         print(i, end=" ")
 print()
+"""
 
+#Escribir funciones que dadas dos cadenas de caracteres:
+#-Indique si la segunda cadena es una subcadena de la primera. Por ejemplo, cadena es una subcadena de subcadena.
+#-Devuelva la que sea anterior en orden alfabético. Por ejemplo, si recibe kde y gnome debe devolver gnome
+"""
+cadena1 = str(input("Introduce una cadena "))
+cadena2 = str(input("Introduce otra cadena "))
+
+if cadena1.find(cadena2)>-1:
+    print(f"{cadena1} es una subcadena de {cadena2}")
+else:
+        print(f"{cadena1} NO es una subcadena de {cadena2}")
+
+print(cadena1 if cadena1<cadena2 else cadena2)
+"""
+
+#Escribir un programa python que dado una palabra diga si es un palíndromo. Un palídromo Un palíndromo 
+#es una palabra, número o frase que se lee igual hacia adelante que hacia atrás. Ejemplo: reconocer
+
+palabra = input("Introduce una palabra:")
+mitadPalabra = (len(palabra)+1)//2
+print(palabra[0:mitadPalabra]+ palabra[mitadPalabra:])
