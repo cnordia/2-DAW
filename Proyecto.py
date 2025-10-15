@@ -32,17 +32,15 @@ def AlbumOSingle(tituloCancion, tituloAlbum):
     else:
         return (f" pertenece al álbum {tituloAlbum}")
     
-listaDatos =[]
+
 def guardarDatos(lista, artista, album, cancion):
     #cantante = {"nombre":artista, "albumes":[{"title":album, "canciones":[cancion]}]}
     for cantante in lista:
         if artista == cantante["nombre"]:
             for alb in cantante["albumes"]:
                 if alb["title"] == album:
-                    if cancion == alb["canciones"]:
-                        print("Cancion repetida")
-                    else:
-                        alb["canciones"].append(cancion)
+                    if not cancion in alb["canciones"]:
+                        alb["canciones"].append(cancion)     
                     return lista
             #Si el album no se encuentra se crea uno nuevo
             cantante["albumes"].append({"title":album, "canciones":[cancion]})
@@ -54,52 +52,67 @@ def guardarDatos(lista, artista, album, cancion):
     return lista
 
 
-menu = True
+def main():
+    listaDatos =[]
+    menu = True
+    while (menu):
+        try:
+            opcion = int(input("Introduzca una de las siguientes opciones:\n" \
+            "                   1- Buscar artista\n" \
+            "                   2- Buscar cancion\n" \
+            "                   3- Ver datos guardados\n" \
+            "                   4- Salir\n->" ))
+            match opcion:
+                case 1:
+                    nombreArt = str(input("Introduzca el nombre del artista: "))
+                    datosArtista = buscarArtista(nombreArt)
+                    id = datosArtista["data"][0]["id"]
+                    nombreArt = datosArtista["data"][0]["name"]
+                    print("--------------------------------------------------")
+                    datosTopCanciones = buscarTopCanciones(id)
+                    for canciones in datosTopCanciones["data"]:
+                        print(f"{canciones["title"]} -> {round(canciones["duration"]/60,2)} min ,{AlbumOSingle(canciones["title"], canciones["album"]["title"])}")
+                        print()
+                        guardarDatos(listaDatos, nombreArt, canciones["album"]["title"], canciones["title"])
+                    print("-------------------------------------------------")
+
+                    
+                case 2:
+                    cancion = str(input("Introduzca la canción a buscar: "))
+                    datosCancion = buscarCancion(cancion)
+                    print("--------------------------------------------------")
+                    print(f"{datosCancion["data"][0]["title"]} ->{round(datosCancion["data"][0]["duration"]/60,2)}min, {AlbumOSingle(datosCancion["data"][0]["title"], 
+                    datosCancion["data"][0]["album"]["title"])}, del cantante {datosCancion["data"][0]["artist"]["name"]}")
+                    guardarDatos(listaDatos, datosCancion["data"][0]["artist"]["name"], datosCancion["data"][0]["album"]["title"], datosCancion["data"][0]["title"])
+                    print("--------------------------------------------------")
 
 
-while (menu):
-    opcion = int(input("Introduzca una de las siguientes opciones:\n" \
-    "                   1- Buscar artista\n" \
-    "                   2- Buscar cancion\n" \
-    "                   3- Ver datos guardados\n" \
-    "                   4- Salir\n->" ))
-    match opcion:
-        case 1:
-            nombreArt = str(input("Introduzca el nombre del artista: "))
-            datosArtista = buscarArtista(nombreArt)
-            id = datosArtista["data"][0]["id"]
-            nombreArt = datosArtista["data"][0]["name"]
-            print("--------------------------------------------------")
-            datosTopCanciones = buscarTopCanciones(id)
-            for canciones in datosTopCanciones["data"]:
-                print(f"{canciones["title"]} -> {round(canciones["duration"]/60,2)} min ,{AlbumOSingle(canciones["title"], canciones["album"]["title"])}")
-                print()
-                guardarDatos(listaDatos, nombreArt, canciones["album"]["title"], canciones["title"])
-            print("-------------------------------------------------")
+                case 3:
+                    pintar = "Sin datos"
+                    for cant in listaDatos:
+                        pintar = "🎤 "+cant["nombre"]
+                        for alb in cant["albumes"]:
+                            pintar += "\n     💿 "+alb["title"]
+                            for c in alb["canciones"]:
+                                if AlbumOSingle(c, alb["title"]) == " es un single":
+                                   pintar += " -> 🎵 Single"
+                                else:
+                                    pintar += "\n       🎵 "+c
+                        print("--------------------------------")
+                        print(pintar)
 
-            
-        case 2:
-            cancion = str(input("Introduzca la canción a buscar: "))
-            datosCancion = buscarCancion(cancion)
-            print("--------------------------------------------------")
-            print(f"{datosCancion["data"][0]["title"]} ->{round(datosCancion["data"][0]["duration"]/60,2)}min, {AlbumOSingle(datosCancion["data"][0]["title"], 
-            datosCancion["data"][0]["album"]["title"])}, del cantante {datosCancion["data"][0]["artist"]["name"]}")
-            guardarDatos(listaDatos, datosCancion["data"][0]["artist"]["name"], datosCancion["data"][0]["album"]["title"], cancion)
-            print("--------------------------------------------------")
+                case 4:
+                    print("Saliendo del menú")
+                    menu=False
+                case _:
+                    print("Introduzca un valor válido")
+                    
+        except ValueError:
+            print(f"Error al introducir un valor")
+
+        except Exception as e:
+            print(f"Error {e}")
 
 
-        case 3:
-            for i in listaDatos:
-                pintar = i["nombre"],i["albumes"]
-                print(pintar)
-                for datosAlb in i:
-                    pintar += datosAlb["title"]
-                    for c in datosAlb:
-                        pintar+= c
-
-        case 4:
-            print("Saliendo del menú")
-            menu=False
-        case _:
-            print("Introduzca un valor válido")
-
+if __name__=="__main__":
+    main()
