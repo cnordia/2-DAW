@@ -1,0 +1,51 @@
+body{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1{
+    border: 1px solid red;
+    width: 175px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+fieldset{
+    width: 200px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+label{
+   display: block;
+   border: 1px solid;
+}
+
+
+input{
+   border: 1px solid red;
+   margin-bottom: 15px;
+}
+button{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+nav{
+    margin-top: 10px;
+    border: 2px solid blue
+}
+
+ul{
+    border: 3px solid black;
+    padding: 10px;
+    
+}
+
+li{
+    border: 1px solid red;
+    display: inline;
+
+}

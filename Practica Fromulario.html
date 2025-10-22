@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="Practica.css">
+    <script src="2-DAW/Boletin2.js"></script>
+</head>
+<body>
+
+    <header>Introducción a <b>HTML</b></header>
+
+    <nav>
+        <ul>
+            <li>Inicio</li>
+            <li>Formulario</li>
+            <li>Configuración</li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Formulario</h1>
+        <form>
+            <fieldset>
+                <label for="nombre">Nombre de usuario</label>
+                <input type="text" id="nombre" name="Nombre" required></input>
+
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="Nombre" required placeholder="@gmail.com"></input>
+
+                <label for="contraseña">Contraseña</label>
+                <input type="password" id="contraseña" name="Nombre" required placeholder="****" minlength="3"></input>
+
+                <label for="confirmacion">Confirmacion Contraseña</label>
+           
+                <input type="password" id="confirmacion" name="Nombre" required placeholder="****" minlength="3"></input>
+
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo">
+                    <option value="m">Masculino</option>
+                    <option value="f">Femenino</option>
+                </select>
+
+            </fieldset>
+
+            <button type="submit">Subir Formilario</button>
+       
+        </form>
+    </main>
+
+</body>
+</html>
