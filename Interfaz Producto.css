@@ -1,0 +1,33 @@
+body{
+    display: flex;
+    min-height: 100vh;
+    margin-top: 10px;
+}
+
+.imgdescriptivas{
+    display: flex;
+    flex-direction: column;
+    flex:1 0 5%;
+    border: 2px solid;
+
+}
+
+.imgdescriptivas img{
+    margin: 10px;
+    border: 2px solid red;
+    
+}
+
+.imgprincipal{
+    flex: 1 0 50%;
+}
+
+.columDescripcion{
+    margin:10px;
+}
+
+.recuadro{
+    background-color: red;
+    display: inline-block;
+    color: white;
+}
