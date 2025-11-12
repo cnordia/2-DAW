@@ -28,8 +28,7 @@ pasar de izquierda a derecha o viceversa las provincias seleccionadas de una de 
 a la de destino. Habrá que controlar que si la provincia ya existe en alguna de las dos listas múltiples, no se 
 permitirá que se agregue de nuevo.*/
 
-
-
+/*
 document.querySelector("input[name = btnAgregar]").addEventListener("click", () =>{
     cod_provincia = frmEntrada.txtCodigo.value.trim();
     provincia = frmEntrada.txtProvincia.value.trim();
@@ -74,4 +73,10 @@ function pasarIzquierda(){
     lstProvincias.add(nuevaOpcion);
     lstDestino.remove(index);
 
-};
+};*/
+
+
+/*5. Dado el formulario con un checkbox que puede ser marcado o desmarcado pulsando el botón correspondiente. 
+Inicialmente dicho botón no hace nada, hay que añadirle el manejador de eventos correspondiente usando uno de 
+los dos botones que están debajo. El otro es para eliminar dicho manejador de eventos. Si el botón tiene el 
+manejador de eventos permitirá marcar o desmarcar el checkbox, en caso contrario no hará nada.*/
