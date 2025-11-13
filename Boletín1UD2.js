@@ -80,3 +80,44 @@ function pasarIzquierda(){
 Inicialmente dicho botón no hace nada, hay que añadirle el manejador de eventos correspondiente usando uno de 
 los dos botones que están debajo. El otro es para eliminar dicho manejador de eventos. Si el botón tiene el 
 manejador de eventos permitirá marcar o desmarcar el checkbox, en caso contrario no hará nada.*/
+/*
+function marcar(){
+    let checkbox = document.getElementById('verano');
+    checkbox.checked = !checkbox.checked
+    checkbox.value = checkbox.checked ? 'Si': 'No'
+    console.log(checkbox.checked , checkbox.value )
+};
+
+function addManejador(){
+document.getElementById('botonMarcar').addEventListener('click', marcar)
+    
+};
+
+function deleteManejador(){
+document.getElementById('botonMarcar').removeEventListener('click', marcar)
+};
+
+*/
+
+/*6.Dado el documento HTML facilitado con este ejercicio, añadir los manejadores de eventos necesarios para:
+-El cuadrado se ponga de color amarillo cuando el cursor del ratón se coloque encima del mismo, para ello usa el atributo 
+classList añadiendo la clase amarillo preparada de antemano. Además deberá informar en la capa de salida de texto 
+del tipo de evento, el objeto en el que se produce, así como las coordenadas del cursor en el momento que se desencadena. 
+Cuando el cursor salga del cuadrado deberá volver todo a la situación original, cuadrado blanco y salida de texto vacía.
+-Cuando el cursor se coloque en el input de texto, cada vez que se pulse una tecla se informará en la capa de salida de texto de la tecla pulsada.
+*/
+
+
+/*7. Dado el documento HTML facilitado con este ejercicio, añadir un único manejador de 
+eventos que gestione la pulsación de las teclas de los diferentes dígitos mostrándolos en el input de solo lectura*/
+
+/*
+document.getElementById('teclado').addEventListener('click', pintarValores);
+
+function pintarValores(event){
+    let numero = event.target.value;
+    let salida = document.getElementById('salida');
+    salida.value += numero;
+    console.log(event.target)
+};
+*/
