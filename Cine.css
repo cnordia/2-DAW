@@ -1,0 +1,132 @@
+body{
+    display:grid;
+    grid-template-areas:
+    "header"
+    "hero"
+    "main"
+    "footer";
+    grid-template-rows: auto 51vh auto auto;
+    min-height: 100vh;  
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: pink;
+
+}
+
+.header a{
+    margin: 0 20px;
+}
+
+nav a{
+    text-decoration: none;
+    color: black;
+}
+
+nav a:hover {
+  text-decoration: underline;      /* subrayado al pasar el mouse */
+  color: purple;                /* cambia color al pasar el mouse */
+}
+
+/* Cuando haces clic */
+nav a:active {
+  color: red;
+}
+
+.comprar_entradas{
+    border: 5px solid purple;
+    background-color: purple;
+    border-radius: 20px;
+    color: white;
+}
+
+
+.hero{
+    grid-area: hero;
+    background-image: url(imgagen.png);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    font-size: 20px;    
+}
+
+.hero h2{
+    font-size: 60px;
+    margin: 0;
+}
+
+p i {
+  color: gold;
+  margin-right: 2px;
+}
+
+.hero p{
+    margin: 40px;
+}
+
+.opciones{
+    margin-bottom: 30px;
+}
+
+.opciones a{
+    border: 5px solid purple;
+}
+
+.opciones button{
+    color: white;
+    font-size: 15px;
+    margin: 0 10px;
+    border-radius: 20px;
+    background-color: purple;
+}
+
+
+main{
+    grid-area: main;
+    background-color: pink;
+}
+
+.tituloCartelera{
+    text-align: center;
+    font-size: 30px;
+}
+
+.cartelera{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;    
+}
+
+.pelicula{
+    height: 275px;
+    width: 200px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+
+}
+.pelicula img{
+    height: 95%;
+    width: 100%;
+    border-bottom: 2px solid black;
+
+}
+
+.pelicula p{
+    height: 5%;
+    text-align: center;
+}
+
+
+footer{
+    grid-area: footer;
+}
