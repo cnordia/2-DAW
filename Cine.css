@@ -20,12 +20,11 @@ header{
     
 }
 
-.header a{
+.header {
     margin: 0 20px;
 }
 
 .comprar_entradas{
-    border: 5px solid purple;
     background-color: purple;
     border-radius: 20px;
     color: white;
@@ -57,8 +56,8 @@ header{
     margin-bottom: 30px;
 }
 
-.opciones a{
-    border: 5px solid purple;
+.opciones button{
+    color:white;
     margin: 0 10px;
     border-radius: 20px;
     background-color: purple;
