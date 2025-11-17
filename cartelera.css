@@ -22,11 +22,9 @@ header{
     justify-content: space-around;
 }
 
-.header a{
-    margin: 0 20px;
-}
 
 header a{
+    margin: 0 20px;
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -111,6 +109,7 @@ main{
 
 
 footer{
+    background-color: rgb(41, 41, 41);
     grid-area: footer;
     text-align: center;
     padding: 20px;

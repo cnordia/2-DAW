@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine - Formulario</title>
+    <link rel="stylesheet" href="formulario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="Cine.html">CINE</a></h1>
+        <nav>
+            <a href="cartelera.html">Cartelera</a>
+            <a href="ubicacion.html">¿Dónde estamos?</a>
+            <a href="formulario.html">Crear Cuenta</a>
+        </nav>
+
+        <button class="comprar_entradas">Comprar entradas</button>
+    </header>
+
+    <main>
+        <h2>Creación de cuenta</h2>
+        <p>Rellene los datos para crear su cuenta</p>
+        <form>
+            <label for="nombre_completo">Nombre y Apellidos:</label>
+            <input type="text" name="nombre">
+
+            <label for="contacto">Contacto:</label>
+            <input type="text" name="contacto" title="Contaco ya sea teléfono o correo">
+                
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" name="contraseña" minlength="5" maxlength="30"> 
+
+            <label for="confirmacion_contraseña">Confirmación de Contraseña:</label>
+            <input type="password" name="confirmacion_contraseña" minlength="5" maxlength="30"> 
+            
+
+            <button type="reset">Crear cuenta</button>
+
+        </form>
+    </main>
+
+     <footer>
+        <div>
+            <h3>Sobre Nosotros</h3>
+            <p>Somos un cine local emergente que busca brindar la mejor experiencia cinematográfica.</p>
+            <p>Correo: <a href="#">cine@gmail.com</a></p>
+        </div>
+
+        <div>
+            <p>© 2025 Cine</p>
+            <p>Síguenos en:</p>
+            <div>
+                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
