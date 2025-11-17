@@ -106,7 +106,26 @@ del tipo de evento, el objeto en el que se produce, así como las coordenadas de
 Cuando el cursor salga del cuadrado deberá volver todo a la situación original, cuadrado blanco y salida de texto vacía.
 -Cuando el cursor se coloque en el input de texto, cada vez que se pulse una tecla se informará en la capa de salida de texto de la tecla pulsada.
 */
+/*
+let cuadrado = document.getElementById('cuadrado');
+let salida = document.getElementById('salida');
 
+function pintarDatos(event){
+    salida.innerHTML = "x "+event.clientX+ " y "+event.clientY
+    cuadrado.classList.add('amarillo')
+
+};
+
+function restablecerCuadrado(event){
+    console.log(event)
+    cuadrado.classList.remove('amarillo');
+
+}
+
+cuadrado.addEventListener('mousemove', pintarDatos);
+cuadrado.addEventListener('mouseleave', restablecerCuadrado);
+
+*/
 
 /*7. Dado el documento HTML facilitado con este ejercicio, añadir un único manejador de 
 eventos que gestione la pulsación de las teclas de los diferentes dígitos mostrándolos en el input de solo lectura*/
@@ -121,3 +140,42 @@ function pintarValores(event){
     console.log(event.target)
 };
 */
+
+
+/*8. Dado el documento HTML facilitado con este ejercicio, añadir un manejador de eventos que 
+impida que se introduzcan dígitos en el input.*/
+/*
+let input = document.getElementById('txtEntrada');
+
+function nodigitos(event){
+    let datos = event.key;
+    console.log(datos)
+    if(/[^0-9]/.test(datos)){
+        input.value +=datos
+    }
+    event.preventDefault();
+        
+};
+
+input.addEventListener('keydown', nodigitos)
+
+*/
+
+
+/*9. Dado el documento HTML facilitado con este ejercicio, añadir un manejador de eventos 
+que impida copiar el texto que haya en el input.*/
+
+/*
+let input = document.getElementById('txtEntrada');
+
+function noclickDerecho(event){
+    event.preventDefault()  
+    console.log(event)
+}
+
+input.addEventListener('copy', noclickDerecho);
+*/
+
+/*10. Dado el documento HTML facilitado con este ejercicio, añadir los manejadores de eventos necesarios 
+para mostrar un mensaje informativo en la capa de salida acerca de cuál de los dos botones del ratón se ha pulsado.*/
+
