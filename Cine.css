@@ -98,6 +98,7 @@ p i{
 
 main{
     grid-area: main;
+    margin-bottom: 30px;
 }
 
 .tituloCartelera{
@@ -137,4 +138,70 @@ footer{
     text-align: center;
     padding: 20px;
     color: white;
+}
+
+/* Media query para tablets y pantallas medianas */
+@media (max-width: 1024px) {
+    .hero h2 {
+        font-size: 45px;
+    }
+    .hero p {
+        font-size: 16px;
+    }
+    .opciones button {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin: 5px;
+    }
+    .cartelera {
+        gap: 15px;
+    }
+    .pelicula {
+        width: 200px;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    nav a {
+        margin:0px 10px 0px 10px;
+        font-size: 14px;
+    }
+    nav{
+        margin-bottom: 20px;
+    }
+
+    .hero h2 {
+        font-size: 35px;
+    }
+
+    .opciones button {
+        width: 100%;
+        margin: 5px auto;
+    }
+    .cartelera {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .pelicula {
+        width: 225px;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .opciones button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
 }
