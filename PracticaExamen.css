@@ -1,0 +1,100 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    border: 2px solid black;
+    
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 20px;
+    align-items: center;
+
+}
+
+nav input{
+    height: 50%;
+    width: 300px;
+}
+
+nav div{
+    align-content: center;
+}
+
+nav div a{
+    border-radius: 100% ;
+    padding: 20px;
+    background-color: gray;
+    color: white;
+}
+
+
+.hero{
+    display: flex;
+    flex:1;
+    border: 2px solid blue;
+}
+
+aside{
+    width: 20%;
+    border-right: 2px solid black;
+    text-align: center;
+}
+
+aside ul{
+    margin: 10px;
+    padding: 0px;
+    list-style: none;
+
+}
+
+aside li{
+    border: 2px solid black;
+    margin-bottom: 20px;
+    padding:10px 0px;
+}
+
+main{
+    width: 80%;
+}
+
+main .tarjetas{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 10px;
+    
+}
+
+main .tarjetas article{
+    border: 2px solid grey;
+    width: 200px;
+    height: auto;
+}
+
+main .tarjetas article a{
+    background-color: greenyellow;
+    color:greenyellow;
+
+}
+
+
+.tablas{
+    display: flex;
+    border: 2px solid yellow;
+}   
+
+.tablas article{
+     width: 50%;
+    border: 2px solid grey;
+    margin: 10px 20px;
+    
+}
