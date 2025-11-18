@@ -1,0 +1,150 @@
+## HTML Básico
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título</title>
+</head>
+<body>
+    <header></header>   <!-- Encabezado -->
+    <nav></nav>         <!-- Navegación -->
+    <main></main>       <!-- Contenido principal -->
+    <aside></aside>     <!-- Contenido lateral/extra -->
+    <article></article> <!-- Contenido independiente -->
+    <section></section> <!-- Sección temática -->
+    <footer></footer>   <!-- Pie de página -->
+</body>
+</html>
+
+## Formularios y autofill
+
+<form>
+    <input type="text" name="nombre" autocomplete="name">
+    <input type="email" name="email" autocomplete="email">
+</form>
+
+## Enlaces y estados
+
+```css
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    color: purple;  /* al pasar el mouse */
+}
+a:active {
+    color: red;     /* al hacer clic */
+}
+```
+
+## CSS Básico
+
+### Selectores importantes
+
+```css
+element {}         /* todos los elementos de ese tipo */
+.class {}          /* elementos con clase */
+#id {}             /* elemento con id */
+element.class {}   /* elemento específico con clase */
+```
+
+### Box Model
+
+```css
+div {
+    margin: 10px;   /* fuera del borde */
+    border: 2px solid black;
+    padding: 10px;  /* dentro del borde */
+    width: 200px;
+    height: 100px;
+}
+```
+
+### Padding lateral
+
+```css
+.elemento {
+    padding: 0 20px; /* top/bottom 0, left/right 20px */
+}
+```
+
+## Layouts
+
+### Flexbox
+
+```css
+.container {
+    display: flex;
+    justify-content: space-around; /* alineación horizontal */
+    align-items: center;           /* alineación vertical */
+    flex-direction: column;        /* columna */
+    flex-wrap: wrap;               /* que se ajusten al ancho */
+}
+.flex-item {
+    flex: 1; /* ocupa espacio disponible */
+}
+```
+
+### Grid
+
+```css
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; /* espacio entre items */
+}
+.item {
+    border: 2px solid gray;
+}
+```
+
+* `grid-template-areas` → asigna nombres a cada zona del grid
+* `grid-area: nombre;` → colocar el elemento en la zona correspondiente
+* `auto-fill` → crea automáticamente columnas que caben en el contenedor
+* `minmax(min, max)` → tamaño mínimo y máximo de columnas/filas
+
+## Responsive / Media Queries
+
+```css
+@media(max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .cartelera {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+```
+
+* Se usa para adaptar diseño a diferentes tamaños de pantalla
+* Valores típicos: 480px (móvil), 768px (tablet), 1024px (laptop)
+
+## Otros trucos útiles
+
+```css
+ul {
+    list-style: none;  /* quitar viñetas */
+    padding: 0;
+    margin: 0;
+}
+.hero {
+    min-height: 100vh; /* ocupa toda la ventana */
+    display: flex;
+    flex-direction: column;
+    justify-content: end; /* contenido abajo */
+}
+button {
+    border-radius: 20px;
+    background-color: yellow;
+    padding: 10px;
+}
+img {
+    width: 100%;       /* adaptable al contenedor */
+    height: auto;
+}
+```

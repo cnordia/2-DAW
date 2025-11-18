@@ -1,9 +1,6 @@
-html, body {
-    height: 100%;
+body{
+    min-height: 100vh;
     margin: 0;
-}
-
-body {
     display: flex;
     flex-direction: column;
 }
@@ -40,8 +37,8 @@ nav div a{
 
 .hero{
     display: flex;
-    flex:1;
-    border: 2px solid blue;
+    border: 2px solid red;
+    flex: 1;
 }
 
 aside{
