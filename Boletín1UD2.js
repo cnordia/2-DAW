@@ -178,4 +178,41 @@ input.addEventListener('copy', noclickDerecho);
 
 /*10. Dado el documento HTML facilitado con este ejercicio, añadir los manejadores de eventos necesarios 
 para mostrar un mensaje informativo en la capa de salida acerca de cuál de los dos botones del ratón se ha pulsado.*/
+/*
+let body = document.querySelector("body");
+
+body.addEventListener('mousedown',(event) => {
+    let mensaje
+    if (event.button === 0) {
+        mensaje = "Has pulsado el botón IZQUIERDO.";
+    } else if (event.button === 2) {
+        mensaje = "Has pulsado el botón DERECHO.";
+    } else if (event.button === 1) {
+        mensaje = "Has pulsado la RUEDA del ratón.";
+    }
+    document.querySelector('p').innerHTML = mensaje;
+});
+
+body.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+});
+*/
+/*11. Dado el documento HTML facilitado con este ejercicio, añadir un manejador de eventos al formulario que muestre 
+por consola el atributo tagName de las propiedades target y currentTarget del objeto evento, además incluye también 
+la referencia al objeto this, para que quede claro a qué objeto se referencia al hacer click sobre el documento.
+Hacer pruebas haciendo click en el párrafo, la capa o el formulario.*/
+/*
+let formulario = document.querySelector("form");
+
+formulario.addEventListener('click',(event) => {
+    console.log(event.currentTarget.tagName);
+    console.log(event.target.tagName);
+    console.log(this.tagName);
+
+});
+*/
+
+/*12.Dado el documento HTML facilitado con este ejercicio, añadir un manejador de eventos que permita validar si el input 
+del formulario está vacío. En ese caso no se procesa el formulario y se mostrará un mensaje de alerta informando de tal circunstancia.*/
+
 
