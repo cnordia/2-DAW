@@ -4,16 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ejercicio 09</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        border: 1px solid black;
+        padding: 3px 5px;
+        text-align: center;
+      }
+    </style>
+    <title>Ejercicio 04</title>
   </head>
   <body>
-    <h1>Cancelando la acción por defecto del navegador</h1>
-
-    <form id="formulario" name="formulario">
-      <label>Introduce texto e intenta copiarlo: </label>
-      <input type="text" id="txtEntrada" name="txtEntrada" />
+    <h1>Creando tablas usando métodos de manejo del DOM</h1>
+    <br />
+    <form name="formulario">
+      <label>Filas: </label>
+      <input type="number" name="filas" min="1" />
+      <label>Columnas: </label>
+      <input type="number" name="columnas" min="1" />
     </form>
-    <script src="./Boletín1UD2.js"></script>
+    <br />
+    <button id="boton">Crear tabla</button>
+    <br /><br />
+    <div id="tabla"></div>
+    <script src="./Boletín1UD3.js"></script>
   </body>
 </html>
 

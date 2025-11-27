@@ -5,7 +5,7 @@ body{
     "hero"
     "main"
     "footer";
-    grid-template-rows: auto 70vh auto auto;
+    grid-template-rows: auto auto auto auto;
     min-height: 100vh;  
     margin: 0;
     padding: 0;
@@ -52,25 +52,37 @@ nav a:active {
 }
 
 
-.opciones{
-    margin-bottom: 30px;
+.hero .principal{
+    transition: 500ms;
+    gap: 3px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    align-content: center;
+    margin: 20px 100px;
 }
 
-
-.opciones button{
-    color: black;
-    font-size: 15px;
-    padding: 10px;
-    margin: 0 10px;
-    border-radius: 20px;
-    background-color: rgb(241, 225, 79);
-    font-weight: bold;
+.principal:has(.center:hover){
+    grid-template-columns: 1fr 2fr 1fr;
+}
+.principal:has(.left:hover){
+    grid-template-columns: 2fr 1fr 1fr;
+}
+.principal:has(.right:hover){
+    grid-template-columns: 1fr 1fr 2fr;
 }
 
+.hero p{
+    visibility: hidden;
+}
+.hero .principal div{
+    height: 100%;
+    width: auto;
+}
 
-main{
-    grid-area: main;
-    margin-bottom: 30px;
+.hero img{
+    height: auto;
+    width: 80%;
 }
 
 .tituloCartelera{
@@ -81,6 +93,8 @@ main{
 main{
     background: rgb(241, 225, 79);
     color:  rgb(20, 24, 29);
+    grid-area: main;
+    margin-bottom: 30px;
 }
 
 .cartelera{

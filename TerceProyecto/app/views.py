@@ -1,0 +1,100 @@
+from django.shortcuts import render, redirect
+from .models import Ingrediente, CategoriaIngrediente
+from django.forms import formset_factory, modelformset_factory
+from .form import *
+
+# Create your views here.
+
+def inicio(request):
+    return render(request, 'app/inicio.html')
+
+def ingredientes_list(request):
+
+    ingredientes = Ingrediente.objects.all()
+    campos = [field.name for field in Ingrediente._meta.get_fields()]
+    categorias = CategoriaIngrediente.objects.all()
+
+    if not 'reset' in request.GET:
+        
+
+        cat_selecionada = request.GET.get('categoria') 
+
+        refrigerado= request.GET.get('refrigerado')
+
+        prod_selec = request.GET.get('nombreprod')
+
+        if cat_selecionada:
+            ingredientes = ingredientes.filter(categoria__id=cat_selecionada)
+            valor_categoria = cat_selecionada
+
+        else:
+            valor_categoria = 1
+
+        if refrigerado:
+            ingredientes = ingredientes.filter(refrigerado = True)
+        
+        else:
+             ingredientes = ingredientes.filter(refrigerado = False)
+
+        if prod_selec:
+            ingredientes = ingredientes.filter(prod_selec=ingredientes.name)
+        
+
+
+
+        return render(request, 'app/ingredientes.html', {'campos':campos, 'ingredientes':ingredientes, 
+                                                        'categorias':categorias, 'valor_categoria': valor_categoria, 'refrigerado':refrigerado,
+                                                        'prod_selec':prod_selec})
+
+    else:
+        return render(request, 'app/ingredientes.html', {'campos':campos, 'ingredientes':ingredientes, 'categorias':categorias})
+    
+# def nuevos_ingredientes(request): # Metodo Forms
+#     IngredientFormSet = formset_factory(IngredienteForm, extra=3)
+
+#     if request.method == 'POST':
+#         formset = IngredientFormSet(request.POST) #Instanciamos el Formset con los datos del formulario POST
+#         if formset.is_valid(): #Validamos los formularios con la validaciṕon básica y si existe un validación clean_<campo> la hará después(Esto llama a clean_<campo> en el modelo)
+#             for form in formset: #Recogemos cada uno de los campos de cada formulario 
+#                 nombre = form.cleaned_data.get("nombre") #En clean_data será donde serecogan los datos validados(es un diccionario)
+#                 categoria = form.cleaned_data.get("categoria")
+#                 refrigerado = form.cleaned_data.get("refrigerado")
+
+#                 Ingrediente.objects.create(nombre = nombre, categoria = categoria, refrigerado = refrigerado)
+
+#             return redirect('ingredientes')
+        
+#         else:
+#             print(formset.errors) #Esto es lo que devuelve el raise de los clean u otros errores (como el required= true y no se pone un valor)
+
+#     else:
+#         formset = IngredientFormSet()
+
+#     contexto = {'formularios':formset}
+#     return render(request, 'app/nuevos_ingredientes.html', contexto)
+
+
+
+def nuevos_ingredientes(request): # Metodo ModelForm
+    IngredientFormSet = modelformset_factory(Ingrediente, form=IngredienteModelForm, extra=3)
+
+    if request.method == 'POST':
+        formset = IngredientFormSet(request.POST, Ingrediente.objects.all(None)) 
+        if formset.is_valid():
+            for form in formset:
+                nombre = form.cleaned_data.get("nombre")
+                categoria = form.cleaned_data.get("categoria")
+                refrigerado = form.cleaned_data.get("refrigerado")
+
+                Ingrediente.objects.create(nombre = nombre, categoria = categoria, refrigerado = refrigerado)
+
+            return redirect('ingredientes')
+        
+        else:
+            print(formset.errors) #Esto es lo que devuelve el raise de los clean u otros errores (como el required= true y no se pone un valor)
+
+    else:
+        formset = IngredientFormSet()
+
+    contexto = {'formularios':formset}
+    return render(request, 'app/nuevos_ingredientes.html', contexto)

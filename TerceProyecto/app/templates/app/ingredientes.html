@@ -1,0 +1,50 @@
+{% extends 'app/base.html' %}
+
+{% block titulo %} Ingredientes {% endblock %}
+
+{% block contenido %}
+<form action="" method="get">
+
+
+    <select name="categoria" id="categoria">
+
+        <option value="-" selected>-</option>
+        {% for categoria in categorias %}   
+            <option value="{{categoria.id}}" {% if categoria.id == valor_categoria %}selected{% endif %}>{{categoria.nombre}}
+            </option>
+            
+        {% endfor %}
+
+    </select>
+
+    <label for="refrigerado">¿Refrigerado?</label>
+    <input type="checkbox" name="refrigerado" id="refrigerado">
+
+    <label for="producto">Producto</label>
+    <input type="text" name="nombreprod" id="nombreprod">
+
+    <input type="submit" value="Filtrar">
+
+    <input type="submit" name="reset" value="Quitar Filtro">
+    
+
+</form>
+
+<table>
+    <tr>
+        {% for campo in campos %}
+            <th>{{campo}}</th>
+        {% endfor %}
+            <th>Acciones</th>
+    </tr>
+    <tr>
+        {% for ingrediente in ingredientes %}
+            <td>{{ingrediente}}</td>
+        {% empty %}
+            <td>No hay ingredientes aún.</td>
+        {% endfor %}
+    </tr>-
+</table>
+
+
+{% endblock %}

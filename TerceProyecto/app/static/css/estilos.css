@@ -1,0 +1,103 @@
+/* ----- ESTILOS GENERALES ----- */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2; /* gris claro */
+    color: #333;
+}
+
+/* Contenedor centrado */
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* ----- TITULOS ----- */
+
+h1, h2, h3 {
+    color: #4A90E2; /* azul suave */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ----- ENLACES ----- */
+
+a {
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F5A623; /* naranja */
+    text-decoration: underline;
+}
+
+/* ----- LISTAS ----- */
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    border-left: 4px solid #4A90E2;
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+li:hover {
+    background: #eaf3ff;
+    border-left-color: #F5A623;
+}
+
+/* ----- BOTONES ----- */
+
+button, .btn {
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+    background-color: #F5A623;
+}
+
+/* ----- TABLAS (si las usas) ----- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+thead {
+    background-color: #4A90E2;
+    color: white;
+
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+
+}
+
+tr:hover {
+    background-color: #eaf3ff;
+}
