@@ -9,14 +9,14 @@ let filas = tabla.rows
 document.getElementById('principal').addEventListener('click', () => {
     for(let i=0; i < filas.length ;i++){
         let celda = filas[i].cells[i]
-        celda.style.background = 'blue'
+        celda.style.backgroundColor = 'blue'
     }
 });
 
 document.getElementById('resetear').addEventListener('click', () => {
     for(let i = 0; i<filas.length;i++){
         for(let x = 0; x < filas.length; x++){
-            filas[i].cells[x].style.background = 'white'
+            filas[i].cells[x].style.backgroundColor = 'white'
         }
     }
 });
@@ -26,7 +26,7 @@ document.getElementById('secundaria').addEventListener('click', ()=>{
     for(let i= 0; i < filas.length ;i++){
         contador-- 
         let celda = filas[i].cells[contador]
-        celda.style.background = 'red'
+        celda.style.backgroundColor = 'red'
     }
 });
 
@@ -36,18 +36,24 @@ al pulsar en el botón “Crear Tabla” se genere automáticamente una tabla HT
 como se ha especificado en el formulario. Dicha tabla deberá ubicarse en la capa con identificador “tabla” 
 y cada celda deberá estar numerada tal y como se puede ver en la siguiente ilustración.*/
 
-let filas = document.querySelector('input[name="filas"]').value;
-let columnas = document.querySelector('input[name="columnas"]').value;
-let tabla = document.createElement('table')
+
 
 document.getElementById('boton').addEventListener('click', ()=>{
+    console.log('BotonPulsado');
+    let filas = document.querySelector('input[name="filas"]').value;
+    let columnas = document.querySelector('input[name="columnas"]').value;
+    let tabla = document.createElement('table')
+
+    document.getElementById('tabla').appendChild(tabla)
     for(let c= 0; c<columnas;c++){
         let fila = document.createElement('tr')
+        let contador = contadorPersistente
+
+        document.getElementsByTagName('table')[0].appendChild(fila)
         for(let f=0; f < filas;f++ ){
             let celda = document.createElement('td')
             celda.textContent = 
-            
-
+            document.getElementsByTagName('tr')[c].appendChild(celda)
         }
     }
 });
