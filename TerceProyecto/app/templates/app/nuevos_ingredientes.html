@@ -6,9 +6,9 @@
 <form action="" method="post">
     {% csrf_token %}
     {{formularios.management_form}}  <!-- Necesario para que el formset funcione correctamente-->
-{% for formulario in formularios %}
-    {{formulario}}
-{% endfor %}
+    {% for formulario in formularios %}
+        {{formulario}}
+    {% endfor %}
     <button type="submit">Guardar</button>
 
 </form>

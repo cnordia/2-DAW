@@ -79,14 +79,9 @@ def nuevos_ingredientes(request): # Metodo ModelForm
     IngredientFormSet = modelformset_factory(Ingrediente, form=IngredienteModelForm, extra=3)
 
     if request.method == 'POST':
-        formset = IngredientFormSet(request.POST, Ingrediente.objects.all(None)) 
+        formset = IngredientFormSet(request.POST, Ingrediente.objects.none()) 
         if formset.is_valid():
-            for form in formset:
-                nombre = form.cleaned_data.get("nombre")
-                categoria = form.cleaned_data.get("categoria")
-                refrigerado = form.cleaned_data.get("refrigerado")
-
-                Ingrediente.objects.create(nombre = nombre, categoria = categoria, refrigerado = refrigerado)
+            formset.save()
 
             return redirect('ingredientes')
         
@@ -94,7 +89,7 @@ def nuevos_ingredientes(request): # Metodo ModelForm
             print(formset.errors) #Esto es lo que devuelve el raise de los clean u otros errores (como el required= true y no se pone un valor)
 
     else:
-        formset = IngredientFormSet()
+        formset = IngredientFormSet(Ingrediente.objects.none())
 
     contexto = {'formularios':formset}
     return render(request, 'app/nuevos_ingredientes.html', contexto)
