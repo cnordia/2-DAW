@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#ej2 {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- CIELO: Ciclo de 40 segundos --- */
+#animacion-cielo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation: cicloDia 40s infinite linear;
+}
+
+@keyframes cicloDia {
+    0%    { background-color: #00112B; }
+    25%   { background-color: #DBFEFE; }
+    45%   { background-color: #00112B; } 
+    
+    50%   { background-color: #00112B; }
+    75%   { background-color: #00112B; }
+    100%  { background-color: #00112B; }
+}
+
+#agua {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: #3995f1;
+    z-index: 10;
+}
+
+#sol {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    animation: movimientoSol 40s infinite linear;
+    transform-origin: center;
+    opacity: 0;
+}
+
+@keyframes movimientoSol {
+    0% { 
+        transform: translate(-20vw, 90vh);
+        opacity: 1; 
+    }
+    
+    25% { 
+        transform: translate(50vw, 15vh);
+        opacity: 1; 
+    }
+    
+    50% { 
+        transform: translate(120vw, 90vh);
+        opacity: 1; 
+    }
+
+    50.01% { opacity: 0; transform: translate(-20vw, 90vh); }
+    100%   { opacity: 0; transform: translate(-20vw, 90vh); }
+}
+
+#luna {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    animation: movimientoLuna 40s infinite linear;
+    opacity: 0;
+}
+
+@keyframes movimientoLuna {
+    0%    { opacity: 0; transform: translate(-20vw, 90vh); }
+    49.99% { opacity: 0; transform: translate(-20vw, 90vh); }
+    
+    50% { 
+        transform: translate(-20vw, 90vh); 
+        opacity: 1; 
+    }
+    
+    75% { 
+        transform: translate(50vw, 15vh);
+        opacity: 1; 
+    }
+    
+    100% { 
+        transform: translate(120vw, 90vh);
+        opacity: 1; 
+    }
+}
+
+#nube1, #nube2, #nube3, #nube4 {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    opacity: 1;
+}
+
+#nube1 { top: 10vh; animation: moverNube1 30s infinite linear; }
+@keyframes moverNube1 {
+    0%   { transform: translateX(-30vw); }
+    100% { transform: translateX(130vw); }
+}
+
+#nube2 { top: 20vh; animation: moverNube2 35s infinite linear; }
+@keyframes moverNube2 {
+    0%   { transform: translateX(-60vw); }
+    100% { transform: translateX(130vw); }
+}
+
+#nube3 { top: 30vh; animation: moverNube3 37s infinite linear; }
+@keyframes moverNube3 {
+    0%   { transform: translateX(-100vw); }
+    100% { transform: translateX(130vw); }
+}
+
+#nube4 { top: 40vh; animation: moverNube4 40s infinite linear; }
+@keyframes moverNube4 {
+    0%   { transform: translateX(-150vw); }
+    100% { transform: translateX(130vw); }
+}
