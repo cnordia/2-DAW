@@ -21,12 +21,12 @@ class Ingrediente(models.Model):
     refrigerado = models.BooleanField()
 
     def __str__(self):
-        return f"{self.nombre}, {self.categoria}"
+        return f"{self.nombre}"
     
-    def clean(self):
-        if self.nombre.__len__ > 50:
-            raise ValidationError("El nomrbe supero los caractéres")
-        if self.categoria == None:
-            raise ValidationError("Introduzca una categoria")
-        return super().clean()
-    
+class Receta(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    ingrredientes = models.ManyToManyField(Ingrediente, related_name='recetas')
+
+    def __str__(self):
+        return f"{self.nombre}"

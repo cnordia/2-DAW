@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import Ingrediente, CategoriaIngrediente
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Ingrediente, CategoriaIngrediente, Receta
 from django.forms import formset_factory, modelformset_factory
 from .form import *
 
@@ -93,3 +93,32 @@ def nuevos_ingredientes(request): # Metodo ModelForm
 
     contexto = {'formularios':formset}
     return render(request, 'app/nuevos_ingredientes.html', contexto)
+
+
+def relaciones(request):
+    recetas = Receta.objects.all()
+    ingredientes = Ingrediente.objects.all()
+
+    return render(request, 'app/relaciones.html', {'recetas':recetas, 'ingredientes':ingredientes})
+
+def receta(request, pk):
+    receta = get_object_or_404(Receta, pk=pk)
+    ingredientes = Ingrediente.objects.all()
+    contexto = {'receta':receta, 'ingredientes':ingredientes}
+    return render(request, 'app/receta.html', contexto)
+
+def receta_agregar_ingrediente(request, receta_pk, ingrediente_pk):
+    receta = get_object_or_404(Receta, pk=receta_pk)
+    ingrediente = get_object_or_404(Ingrediente, pk=ingrediente_pk)
+
+    receta.ingrredientes.add(ingrediente)
+
+    return redirect('receta', pk= receta_pk)
+
+def receta_eliminar_ingrediente(request, receta_pk, ingrediente_pk):
+    receta = get_object_or_404(Receta, pk=receta_pk)
+    ingrediente = get_object_or_404(Ingrediente, pk=ingrediente_pk)
+
+    receta.ingrredientes.remove(ingrediente)
+
+    return redirect('receta', pk= receta_pk)

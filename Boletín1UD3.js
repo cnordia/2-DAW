@@ -126,7 +126,7 @@ celda.forEach(celda =>{
 
 /*7.A partir del documento HTML proporcionado para este ejercicio, generar el script necesario para que al pulsar dentro 
 de la tabla, la fila donde se haya hecho click con el cursor se desplazará un lugar hacia arriba dentro de la tabla.*/
-
+/*
 let celdas = document.querySelectorAll('td');
 
 celdas.forEach(celda => {
@@ -136,6 +136,61 @@ celdas.forEach(celda => {
         console.log(fila)
         console.log(filaSuperior)
 
-        fila.parentElement.insertBefore(fila, filaSuperior) //padre.insertBefore(nodoAMover, nodoDeReferencia);
+        if(fila.Superior != null)
+            fila.parentElement.insertBefore(fila, filaSuperior) //padre.insertBefore(nodoAMover, nodoDeReferencia);
     });
 });
+*/
+
+/*8. A partir del documento HTML proporcionado para este ejercicio, generar el script necesario para que al cambiar la opción 
+seleccionada en la lista desplegable se apliquen estilos sobre la capa “texto” de diferentes formas:
+ -Eliminar todos los estilos aplicados: elimina todos los estilos aplicados al texto dejándolo con el formato original que tiene al cargar inicialmente la página.
+ -Cambiando atributo style: usando funciones del DOM cambiar el atributo style para que el texto tenga color azul, un tamaño de 20 píxeles y fuente helvética.
+ -Asignando clases a objetos: usando funciones DOM asignar la clase “claseEstilo” predefinida en el documento html facilitado.
+ -Asignado estilos externos al documento: asignar el fichero ej08.css facilitado al atributo href del enlace a las hojas de estilo del documento html.*/
+/*
+select = document.querySelector('form').opciones;
+console.log(select)
+texto = document.getElementById('texto');
+enlaceCSS = document.getElementById('estilo')
+
+select.addEventListener('change', () => {
+    let opcion = select.value
+
+    if(opcion == 'quitarEstilos'){
+        texto.removeAttribute("style"); // elimina estilos inline
+        texto.className = "";           // elimina clases
+        enlaceCSS.href = "";            // quita CSS externo
+    };
+
+    if(opcion == 'atributoStyle'){
+        texto.removeAttribute("class");
+        enlaceCSS.href = "";
+
+        texto.style.color = "blue";
+        texto.style.fontSize = "20px";
+        texto.style.fontFamily = "Helvetica";
+    };
+
+    if(opcion == 'asignandoClases'){
+        texto.removeAttribute("style");
+        enlaceCSS.href = "";
+
+        texto.classList.add("claseEstilo");
+    ;}
+
+    if(opcion == 'estilosPagina'){
+        texto.removeAttribute("style");
+        texto.className = "";
+
+        enlaceCSS.href = "ej8.css"; // enlaza el CSS externo
+    };
+});
+*/
+
+/*9. A partir del documento HTML proporcionado para este ejercicio, implemente un script que genere un código un captcha para el procesamiento 
+de un formulario. Para ello, al pasar el ratón sobre un texto “Pase el ratón por aquí para ver el código”, se modificará dicho texto para 
+mostrar un número aleatorio de cuatro cifras. Cuando el ratón deje de estar sobre el texto volverá al texto original. Por otro lado, habrá 
+un campo de texto donde se introducirá el último número mostrado. Al enviar el formulario se comprobará que el número introducido y el último 
+mostrado coinciden, si coinciden se enviará el formulario, en caso contrario saltará un alert con un mensaje de error y no se enviará el formulario.*/
+let codCAPTCHA

@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block titulo %} Receta {{receta.nombre}} {% endblock %}
+
+{% block contenido %}
+    {% for ingrediente in receta.ingrredientes.all %}
+       <p>{{ingrediente.nombre}} <a href="{url 'receta_eliminar_ingrediente' receta.pk ingrediente.pk}">Eliminar</a></p>
+    {%endfor%}
+
+    <h2>Añadir Ingredientes</h2>
+
+    <ul>
+        {% for ingrediente in ingredientes %}
+            <li>{{ingrediente.nombre}} <a href="{% url 'receta_agregar_ingrediente' receta.pk ingrediente.pk %}">Añadir</a></li>
+        {%endfor%}
+    </ul>
+{% endblock %}
