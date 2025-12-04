@@ -194,32 +194,83 @@ mostrar un número aleatorio de cuatro cifras. Cuando el ratón deje de estar so
 un campo de texto donde se introducirá el último número mostrado. Al enviar el formulario se comprobará que el número introducido y el último 
 mostrado coinciden, si coinciden se enviará el formulario, en caso contrario saltará un alert con un mensaje de error y no se enviará el formulario.*/
 
-let pasaCod = document.getElementById('captcha')
-let cod = document.getElementById('code')
-let inputVerificar = document.getElementById('verify')
-let boton = document.querySelector('btnLogin')
-let formulario = document.querySelector('formulario')
+
+let pasaCod = document.getElementById('captcha');
+let cod = document.getElementById('code');
+let inputVerificar = document.getElementById('verify');
+let boton = document.querySelector('btnLogin');
+let formulario = document.querySelector('formulario');
+let codCAPTCHA = 0;
+let codAnt= "";
 
 pasaCod.addEventListener('mouseenter', () => {
-    let codCAPTCHA = Math.floor(Math.random()*9000)+1000 //.floor redondea un número hacai abajo
+    codAnt = codCAPTCHA
+    codCAPTCHA = Math.floor(Math.random()*9000)+1000 //.floor redondea un número hacia abajo
     cod.style.visibility = "visible"
     cod.textContent = codCAPTCHA
+    pasaCod.textContent = codAnt
 
-    if( boton && inputVerificar.value == codCAPTCHA){
-        formulario.submit()
-    }
-    else
-        alert("Error")
 
 });
 
 pasaCod.addEventListener('mouseleave', () => {
     cod.style.visibility = 'hidden'
-});
+    pasaCod.textContent = 'Pase el ratón por aquí para  el código captcha'
 
+});
 
 function botonPulsado(boton){
     boton.addEventListener('click', ()=>{
-        return true
+        if(boton && inputVerificar.value == codCAPTCHA){
+            return formulario.submit()
+        }
+        else
+            return alert("Error")
     })
 };
+
+
+/*10. A partir del documento HTML facilitado crea una aplicación para gestionar tareas. Se mostrará un campo de texto para incluir 
+la tarea a realizar, un campo select con la prioridad, Muy Alta, Alta, Media, Baja y Muy Baja y un botón para agregar una nueva tarea. 
+Las tareas se mostrarán en una tabla que tendrá el orden, la tarea, la prioridad y una papelera para eliminar la tarea de la lista. 
+Las tareas están ordenadas según la prioridad. Al agregar una nueva tarea se incluirá la tarea y se reordenará la tabla de tareas pendientes. 
+Para el icono de la papelera podéis usar la librería css que se encuentra en: https://www.w3schools.com/w3css/w3css_icons.asp*/
+
+/*
+let boton = document.getElementById('boton');
+let input = document.querySelector('[name = tarea]').value;
+let prioridad = document.querySelector('[name = prioridad]').value
+let tabla = document.querySelector('table');
+let bEliminar = document.createElement('button')
+
+let contador = 1;
+
+boton.addEventListener('click', ()=>{
+    let fila = document.createElement('tr');
+
+    let celdaInd = crearCelda();
+    celdaInd.textContent = contador;
+    console.log(celdaInd)
+
+    let celdaValor = crearCelda().textValue = input;
+    console.log(celdaValor)
+
+    
+
+    fila.append(celdaInd);
+    fila.append(celdaValor);
+    fila.append(bEliminar.value = 'e')
+    tabla.append(fila);
+    contador++;
+    
+    // for(let f of  tabla.childNodes){
+    //     console.log(f)
+    // };
+
+});
+
+function crearCelda(){
+    celda = document.createElement('td')
+    return celda
+};
+*/
