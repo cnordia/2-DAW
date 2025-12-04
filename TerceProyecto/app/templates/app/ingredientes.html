@@ -39,12 +39,13 @@
     </tr>
     <tr>
         {% for ingrediente in ingredientes %}
-            <td>{{ingrediente}}</td>
+            <td>{{ingrediente}} <a href="{% url 'ingrediente_detalles'  ingrediente.pk%}">Detalles</a> </td>
         {% empty %}
             <td>No hay ingredientes aún.</td>
         {% endfor %}
-    </tr>-
+    </tr>
 </table>
+<a href="{% url 'nuevos_ingredientes' %}">Crear Ingrediente</a>
 
 
 {% endblock %}

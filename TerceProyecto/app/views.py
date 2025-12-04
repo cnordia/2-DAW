@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Ingrediente, CategoriaIngrediente, Receta
+from .models import *
 from django.forms import formset_factory, modelformset_factory
 from .form import *
 
@@ -104,21 +104,53 @@ def relaciones(request):
 def receta(request, pk):
     receta = get_object_or_404(Receta, pk=pk)
     ingredientes = Ingrediente.objects.all()
-    contexto = {'receta':receta, 'ingredientes':ingredientes}
+
+    if request.method == 'POST':
+        formulario = IngredienteRecetaModelForm(request.POST)
+        if formulario.is_valid():
+            formulario.instance.receta= receta
+            formulario.save()
+            return redirect('receta', pk=pk)
+    
+    else:
+        formulario = IngredienteRecetaModelForm()
+
+    contexto = {'receta':receta, 'ingredientes':ingredientes, 'formulario':formulario}
     return render(request, 'app/receta.html', contexto)
-
-def receta_agregar_ingrediente(request, receta_pk, ingrediente_pk):
-    receta = get_object_or_404(Receta, pk=receta_pk)
-    ingrediente = get_object_or_404(Ingrediente, pk=ingrediente_pk)
-
-    receta.ingrredientes.add(ingrediente)
-
-    return redirect('receta', pk= receta_pk)
+    
 
 def receta_eliminar_ingrediente(request, receta_pk, ingrediente_pk):
     receta = get_object_or_404(Receta, pk=receta_pk)
     ingrediente = get_object_or_404(Ingrediente, pk=ingrediente_pk)
 
-    receta.ingrredientes.remove(ingrediente)
+    receta.ingredientes.remove(ingrediente)
 
     return redirect('receta', pk= receta_pk)
+
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.urls import reverse_lazy
+
+class IngredienteListView(ListView):
+    model = Ingrediente
+    template_name = 'app/ingredientes.html'
+    context_object_name = 'ingredientes'
+
+class IngredienteDetallesView(DetailView):
+    model = Ingrediente
+    template_name = 'app/ingrediente_detalles.html'
+    context_object_name = 'ingrediente'
+
+class IngredienteNuveoView(CreateView):
+    model = Ingrediente
+    #fields = '__all__' No es necesario si le pasamos el ModelForm
+    form_class = IngredienteModelForm
+    template_name = 'app/nuevos_ingredientes.html'
+    succes_url = reverse_lazy('ingredientes_list')
+    #Se envia predefinidamente el formulario con la variable llamada {{form}}
+
+
+class IngredienteEliminar(DeleteView):
+    model = Ingrediente
+    #fields = '__all__' No es necesario si le pasamos el ModelForm
+    template_name = 'app/nuevos_ingredientes'
+    succes_url = reverse_lazy('ingredientes_list')

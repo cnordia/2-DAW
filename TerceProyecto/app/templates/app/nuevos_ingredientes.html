@@ -5,11 +5,11 @@
 {% block contenido %}
 <form action="" method="post">
     {% csrf_token %}
-    {{formularios.management_form}}  <!-- Necesario para que el formset funcione correctamente-->
+    <!-- {{formularios.management_form}}  Necesario para que el formset funcione correctamente
     {% for formulario in formularios %}
         {{formulario}}
-    {% endfor %}
+    {% endfor %} -->
+    {{form}}
     <button type="submit">Guardar</button>
-
 </form>
 {% endblock %}

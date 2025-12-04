@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ingrediente, CategoriaIngrediente
+from .models import *
 
 class IngredienteModelForm(forms.ModelForm):
     class Meta:
@@ -17,3 +17,9 @@ class IngredienteForm(forms.Form):
             raise forms.ValidationError('No se permite crear esa categoria')
         
         return categoria 
+    
+class IngredienteRecetaModelForm(forms.ModelForm):
+    class Meta:
+        model = IngredienteReceta
+        fields = '__all__'
+        exclude = ['receta'] 
