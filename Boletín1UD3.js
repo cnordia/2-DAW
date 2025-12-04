@@ -193,4 +193,33 @@ de un formulario. Para ello, al pasar el ratón sobre un texto “Pase el ratón
 mostrar un número aleatorio de cuatro cifras. Cuando el ratón deje de estar sobre el texto volverá al texto original. Por otro lado, habrá 
 un campo de texto donde se introducirá el último número mostrado. Al enviar el formulario se comprobará que el número introducido y el último 
 mostrado coinciden, si coinciden se enviará el formulario, en caso contrario saltará un alert con un mensaje de error y no se enviará el formulario.*/
-let codCAPTCHA
+
+let pasaCod = document.getElementById('captcha')
+let cod = document.getElementById('code')
+let inputVerificar = document.getElementById('verify')
+let boton = document.querySelector('btnLogin')
+let formulario = document.querySelector('formulario')
+
+pasaCod.addEventListener('mouseenter', () => {
+    let codCAPTCHA = Math.floor(Math.random()*9000)+1000 //.floor redondea un número hacai abajo
+    cod.style.visibility = "visible"
+    cod.textContent = codCAPTCHA
+
+    if( boton && inputVerificar.value == codCAPTCHA){
+        formulario.submit()
+    }
+    else
+        alert("Error")
+
+});
+
+pasaCod.addEventListener('mouseleave', () => {
+    cod.style.visibility = 'hidden'
+});
+
+
+function botonPulsado(boton){
+    boton.addEventListener('click', ()=>{
+        return true
+    })
+};
