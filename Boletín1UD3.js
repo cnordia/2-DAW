@@ -194,7 +194,7 @@ mostrar un número aleatorio de cuatro cifras. Cuando el ratón deje de estar so
 un campo de texto donde se introducirá el último número mostrado. Al enviar el formulario se comprobará que el número introducido y el último 
 mostrado coinciden, si coinciden se enviará el formulario, en caso contrario saltará un alert con un mensaje de error y no se enviará el formulario.*/
 
-
+/*
 let pasaCod = document.getElementById('captcha');
 let cod = document.getElementById('code');
 let inputVerificar = document.getElementById('verify');
@@ -228,7 +228,7 @@ function botonPulsado(boton){
             return alert("Error")
     })
 };
-
+*/
 
 /*10. A partir del documento HTML facilitado crea una aplicación para gestionar tareas. Se mostrará un campo de texto para incluir 
 la tarea a realizar, un campo select con la prioridad, Muy Alta, Alta, Media, Baja y Muy Baja y un botón para agregar una nueva tarea. 
@@ -238,39 +238,123 @@ Para el icono de la papelera podéis usar la librería css que se encuentra en: 
 
 /*
 let boton = document.getElementById('boton');
-let input = document.querySelector('[name = tarea]').value;
-let prioridad = document.querySelector('[name = prioridad]').value
-let tabla = document.querySelector('table');
-let bEliminar = document.createElement('button')
+let tabla = document.querySelector('tbody');
 
-let contador = 1;
+const prioridades = {
+    "Muy Alta": 5,
+    "Alta": 4,
+    "Media": 3,
+    "Baja": 2,
+    "Muy Baja": 1
+};
 
 boton.addEventListener('click', ()=>{
     let fila = document.createElement('tr');
 
-    let celdaInd = crearCelda();
-    celdaInd.textContent = contador;
-    console.log(celdaInd)
+    let input = crearCelda();
+    input.textContent = document.querySelector('[name = tarea]').value;
 
-    let celdaValor = crearCelda().textValue = input;
-    console.log(celdaValor)
+    let prioridad = crearCelda();
+    prioridad.textContent = document.querySelector('[name = prioridad]').value;
 
-    
+    let bEliminar = document.createElement('button')
+    let celdaBoton = crearCelda();
+    bEliminar.onclick = function () {
+        this.parentElement.parentElement.remove();
+        reordenarIndice(tabla);
+    };
+    celdaBoton.append(bEliminar);
 
-    fila.append(celdaInd);
-    fila.append(celdaValor);
-    fila.append(bEliminar.value = 'e')
-    tabla.append(fila);
-    contador++;
-    
-    // for(let f of  tabla.childNodes){
-    //     console.log(f)
-    // };
-
+    añadirFila(tabla, fila, input, prioridad, celdaBoton);
 });
 
 function crearCelda(){
     celda = document.createElement('td')
     return celda
 };
+
+function reordenarIndice(tabla){
+    console.log(tabla.children.length)
+    for(let f = 1; f < tabla.children.length; f++){
+        tabla.children[f].children[0].textContent = f;
+    }
+    if(tabla.children.length == 1){
+        tabla.children[0].children[0].textContent = 1;
+    };
+};
+
+
+function añadirFila(tabla, fila, input, prioridad, boton){
+    let prioridadDesigual = true;
+    let indice = crearCelda();
+    fila.append(indice);
+    fila.append(input);
+    fila.append(prioridad);
+    fila.append(boton);
+
+    for(let f = 0; f<tabla.children.length ; f++){
+        if(tabla.children[f].children[2].textContent == prioridad.textContent){
+            tabla.children[f].after(fila);
+            prioridad = false;
+        }
+    if(prioridadDesigual){
+        
+    }
+    }
+
+    if(tabla.children.length == 0){
+        tabla.append(fila);
+    };
+
+    reordenarIndice(tabla);
+};
+
 */
+
+/*11. */
+
+
+//
+let lAprobados = document.getElementById('aprobados');
+let lRecuperacion = document.getElementById('recuperacion');
+let lRepetidores = document.getElementById('repetir');
+
+
+//Radio butons
+let radios = document.getElementsByName('tipo');
+let moverA = null;
+
+
+//Lista de alumnos
+let lAlumnos = document.getElementById('listas').children;
+
+
+
+for(let radio of radios){
+    radio.addEventListener('change', ()=>{        
+        moverA = radio.value //Donde se moverá el alumno
+
+});
+};
+
+//Manejador de Eventos para cada alumno
+for(let i = 0; i<lAlumnos[0].children.length;i++){
+        //console.log(lAlumnos[0].children[i].children[1].children)// Recorremos el arbol hasta llegar a cada elemento de cada lista
+        for(let alumno of lAlumnos[0].children[i].children[1].children){
+            alumno.addEventListener('click', (elem)=>{
+                let alumnoSeleccionado = elem.currentTarget
+                console.log(alumnoSeleccionado.parentElement.id)
+                if(moverA == 'aprob' && alumnoSeleccionado.parentElement.id != 'aprobados'){
+                    lAprobados.append(alumnoSeleccionado);
+                };
+                if(moverA == 'recup' && alumnoSeleccionado.parentElement.id != 'recuperacion'){
+                    lRecuperacion.append(alumnoSeleccionado);
+                };
+                if(moverA == 'repet' && alumnoSeleccionado.parentElement.id != 'repetir'){
+                    lRepetidores.append(alumnoSeleccionado);
+                };
+            });
+        };
+
+};
+
