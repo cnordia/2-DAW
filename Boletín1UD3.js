@@ -403,9 +403,14 @@ function añadirFila(tabla, fila, input, prioridad, boton){
 
 
 
-/*11. */
+/*11. Partiendo de la plantilla facilitada en el ejercicio, implementar el código javascript que permite que la interacción del usuario y el documento sea como se describe a continuación:
+Cuando el usuario haga click sobre alguno de los quince alumnos, éste debe moverse a la posición correspondiente de la lista que se haya indicado en el segundo recuadro azul.
+Cuando el usuario presione el botón “Crear Tablas”, se crearán tres tablas dentro del tercer recuadro azul con el contenido que tengan en ese momento las listas del primer recuadro.
+Cuando el usuario presione el botón “Borrar Tablas” se borrarán las tablas del tercer recuadro azul si las hubiera.
+*/
 
-
+/* (Falta crear la tabla)
+//Listas
 let lAprobados = document.getElementById('aprobados');
 let lRecuperacion = document.getElementById('recuperacion');
 let lRepetidores = document.getElementById('repetir');
@@ -414,6 +419,13 @@ let lRepetidores = document.getElementById('repetir');
 //Radio butons
 let radios = document.getElementsByName('tipo');
 let moverA = null;
+
+//Select options
+let select = document.getElementById('combo');
+
+//Botones creación
+let bCrear = document.getElementById('btnCrearTablas');
+let bEliminar = document.getElementById('btnBorrarTablas');
 
 
 //Lista de alumnos
@@ -435,16 +447,113 @@ for(let i = 0; i<lAlumnos[0].children.length;i++){
             alumno.addEventListener('click', (elem)=>{
                 let alumnoSeleccionado = elem.currentTarget
                 console.log(alumnoSeleccionado.parentElement.id)
-                if(moverA == 'aprob' && alumnoSeleccionado.parentElement.id != 'aprobados'){
-                    lAprobados.append(alumnoSeleccionado);
+
+                if(select.value == 'ultimo'){
+                    if(moverA == 'aprob' && alumnoSeleccionado.parentElement.id != 'aprobados'){
+                        lAprobados.append(alumnoSeleccionado);
+                    };
+                    if(moverA == 'recup' && alumnoSeleccionado.parentElement.id != 'recuperacion'){
+                        lRecuperacion.append(alumnoSeleccionado);
+                    };
+                    if(moverA == 'repet' && alumnoSeleccionado.parentElement.id != 'repetir'){
+                        lRepetidores.append(alumnoSeleccionado);
+                    };
                 };
-                if(moverA == 'recup' && alumnoSeleccionado.parentElement.id != 'recuperacion'){
-                    lRecuperacion.append(alumnoSeleccionado);
+
+                if(select.value == 'primero'){
+                    if(moverA == 'aprob' && alumnoSeleccionado.parentElement.id != 'aprobados'){
+                        lAprobados.prepend(alumnoSeleccionado);
+                    };
+                    if(moverA == 'recup' && alumnoSeleccionado.parentElement.id != 'recuperacion'){
+                        lRecuperacion.prepend(alumnoSeleccionado);
+                    };
+                    if(moverA == 'repet' && alumnoSeleccionado.parentElement.id != 'repetir'){
+                        lRepetidores.prepend(prependendalumnoSeleccionado);
+                    };
                 };
-                if(moverA == 'repet' && alumnoSeleccionado.parentElement.id != 'repetir'){
-                    lRepetidores.append(alumnoSeleccionado);
-                };
+
             });
         };
-
 };
+
+bCrear.onclick = function(){    
+    console.log(document.getElementById('tablas').textContent = '');
+    console.log(lAlumnos[0].children[0].children[1])
+    let copia = lAlumnos[0].cloneNode(true); // Sirve para copiar el nodo raíz, para ponerlo en el append, ya que el append mueve el nodo existente del DOM
+    document.getElementById('tablas').append(copia);
+};
+
+bEliminar.onclick = function(){
+    console.log(document.getElementById('tablas').textContent = '');
+};
+*/
+
+
+
+
+/*12. Partiendo de la plantilla facilitada para este ejercicio, implementar el código en el fichero ej12.js usando los métodos de manejo del DOM de javascript siguiendo las especificaciones que se enumeran a continuación:
+Al hacer click sobre cualquier imagen de la página, esté ubicada donde esté ubicada, se le aplicará la clase CSS “seleccionado”. Si se hace click sobre una imagen que ya tiene dicha clase se le quitará. Si una imagen está seleccionada automáticamente su borde se pondrá de color rojo y aumentará de grosor. Este estilo ya está descrito en el CSS que se facilita.
+Al hacer click sobre el botón “btnBorrar” se eliminarán todas las imágenes seleccionadas. 
+Al hacer click en el botón “btnAplicar” se realizará lo siguiente:
+Se verificarán los controles seleccionados (destino y posición) y las imágenes con la clase “seleccionado” se moverán al contenedor indicado por los mismos y tras ello quedarán sin selección.
+Si está seleccionado “Primer lugar” los elementos se ubicarán antes de la primera imagen que pudiera haber en el contenedor, pero siempre tras el título del contenedor (p.e. “Contenedor 1”).
+Si está seleccionado “Último lugar” los elementos se ubicarán después de la última imagen que pudiera haber en el contenedor, pero siempre tras el título del contenedor (p.e. “Contenedor 1”).
+Varios casos que se pueden dar (hay más):
+Imagen seleccionada en #cont1, se mueve al final de #cont2.
+Imágenes seleccionadas en #cont1 y #cont2, ambas se mueven al final de #cont3.
+Imágenes seleccionadas en #cont1, #cont2 y #cont3, todas se mueven al final de #cont1.
+Si el checkbox “Clonar” está marcado, las imágenes seleccionadas no se moverán de sus ubicaciones al pulsar el botón “btnAplicar”, sino que se clonarán de forma que una copia del elemento es el que aparecerá en el lugar marcado. Tras ello quedarán sin selección tanto las imágenes originales como las copias.
+*/
+
+//1er apartado
+let contenedor1 = document.getElementById('cont1');
+let contenedor2 = document.getElementById('cont2')
+let contenedor3 = document.getElementById('cont3')
+
+pulsadorDeImagenes(contenedor1);
+pulsadorDeImagenes(contenedor2);
+
+function pulsadorDeImagenes(contenedor){
+    contenedor.addEventListener('click', elem =>{
+        if(elem.target.tagName == 'IMG'){
+            let img = elem.target;
+            if(img.classList.contains('seleccionado')){
+                img.classList.remove('seleccionado')
+            }else
+                img.classList.add('seleccionado')
+        }
+    });
+};
+
+//2seg apartado
+
+let bEliminar = document.getElementById('btnBorrar');
+
+bEliminar.onclick= function(){
+    console.log(contenedor1.children.length)
+    for(let i = 1; i<contenedor1.children.length;i++){
+        if(contenedor1.children[i].classList.contains('seleccionado')){
+            contenedor1.children[i].remove();
+            i--;
+        }
+    };
+    for(let i = 1; i<contenedor2.children.length;i++){
+        if(contenedor2.children[i].classList.contains('seleccionado')){
+            contenedor2.children[i].remove();
+            i--;
+        }
+    };
+    for(let i = 1; i<contenedor3.children.length;i++){
+        if(contenedor3.children[i].classList.contains('seleccionado')){
+            contenedor3.children[i].remove();
+            i--;
+        }
+    };
+
+    
+};
+
+//3er apartado
+
+let bAplicar = document.getElementById('btnAplicar');
+
