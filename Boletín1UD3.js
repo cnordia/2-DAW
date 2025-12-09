@@ -236,3 +236,128 @@ Las tareas se mostrarán en una tabla que tendrá el orden, la tarea, la priorid
 Las tareas están ordenadas según la prioridad. Al agregar una nueva tarea se incluirá la tarea y se reordenará la tabla de tareas pendientes. 
 Para el icono de la papelera podéis usar la librería css que se encuentra en: https://www.w3schools.com/w3css/w3css_icons.asp*/
 
+<<<<<<< HEAD
+=======
+/*
+let boton = document.getElementById('boton');
+let tabla = document.querySelector('tbody');
+
+const prioridades = {
+    "Muy Alta": 5,
+    "Alta": 4,
+    "Media": 3,
+    "Baja": 2,
+    "Muy Baja": 1
+};
+
+boton.addEventListener('click', ()=>{
+    let fila = document.createElement('tr');
+
+    let input = crearCelda();
+    input.textContent = document.querySelector('[name = tarea]').value;
+
+    let prioridad = crearCelda();
+    prioridad.textContent = document.querySelector('[name = prioridad]').value;
+
+    let bEliminar = document.createElement('button')
+    let celdaBoton = crearCelda();
+    bEliminar.onclick = function () {
+        this.parentElement.parentElement.remove();
+        reordenarIndice(tabla);
+    };
+    celdaBoton.append(bEliminar);
+
+    añadirFila(tabla, fila, input, prioridad, celdaBoton);
+});
+
+function crearCelda(){
+    celda = document.createElement('td')
+    return celda
+};
+
+function reordenarIndice(tabla){
+    console.log(tabla.children.length)
+    for(let f = 1; f < tabla.children.length; f++){
+        tabla.children[f].children[0].textContent = f;
+    }
+    if(tabla.children.length == 1){
+        tabla.children[0].children[0].textContent = 1;
+    };
+};
+
+
+function añadirFila(tabla, fila, input, prioridad, boton){
+    let prioridadDesigual = true;
+    let indice = crearCelda();
+    fila.append(indice);
+    fila.append(input);
+    fila.append(prioridad);
+    fila.append(boton);
+
+    for(let f = 0; f<tabla.children.length ; f++){
+        if(tabla.children[f].children[2].textContent == prioridad.textContent){
+            tabla.children[f].after(fila);
+            prioridad = false;
+        }
+    if(prioridadDesigual){
+        
+    }
+    }
+
+    if(tabla.children.length == 0){
+        tabla.append(fila);
+    };
+
+    reordenarIndice(tabla);
+};
+
+*/
+
+/*11. */
+
+
+//
+let lAprobados = document.getElementById('aprobados');
+let lRecuperacion = document.getElementById('recuperacion');
+let lRepetidores = document.getElementById('repetir');
+
+
+//Radio butons
+let radios = document.getElementsByName('tipo');
+let moverA = null;
+
+
+//Lista de alumnos
+let lAlumnos = document.getElementById('listas').children;
+
+
+
+for(let radio of radios){
+    radio.addEventListener('change', ()=>{        
+        moverA = radio.value //Donde se moverá el alumno
+
+});
+};
+
+//Manejador de Eventos para cada alumno
+for(let i = 0; i<lAlumnos[0].children.length;i++){
+        //console.log(lAlumnos[0].children[i].children[1].children)// Recorremos el arbol hasta llegar a cada elemento de cada lista
+        for(let alumno of lAlumnos[0].children[i].children[1].children){
+            alumno.addEventListener('click', (elem)=>{
+                let alumnoSeleccionado = elem.currentTarget
+                console.log(alumnoSeleccionado.parentElement.id)
+                if(moverA == 'aprob' && alumnoSeleccionado.parentElement.id != 'aprobados'){
+                    lAprobados.append(alumnoSeleccionado);
+                };
+                if(moverA == 'recup' && alumnoSeleccionado.parentElement.id != 'recuperacion'){
+                    lRecuperacion.append(alumnoSeleccionado);
+                };
+                if(moverA == 'repet' && alumnoSeleccionado.parentElement.id != 'repetir'){
+                    lRepetidores.append(alumnoSeleccionado);
+                };
+            });
+        };
+
+};
+
+>>>>>>> a392924c944819e5638b166a895586928e5a1543
