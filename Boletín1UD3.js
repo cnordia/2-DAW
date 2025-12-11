@@ -584,7 +584,11 @@ bAplicar.addEventListener('click',function(){
         if(i.checked){
             if(i.value == 'first'){
                 for(let img of tImagenesContendores){
-                    cont.children[1].before(img)
+                    if(cont.children.length>1)
+                        cont.children[1].before(img)
+                    else
+                        cont.append(img)
+
                 }
             }else{
                 for(let img of tImagenesContendores){
@@ -595,10 +599,10 @@ bAplicar.addEventListener('click',function(){
     }
     
     if(clonar.checked){
-        tImagenesContendores = []
         buscarImagenSeleccionada()
         for(let img of tImagenesContendores){
-            cont.append(img)
+            //cont.append(img)  append solo mueve la imagen no la clona
+            cont.append(img.cloneNode(true))
         }
         
     }
@@ -608,6 +612,7 @@ bAplicar.addEventListener('click',function(){
 
 
 function buscarImagenSeleccionada(){
+    tImagenesContendores = [];
     
     for(let i = 0; i<contenedores.length -1;i++){
         for(let x = 0; x<contenedores[i].children.length; x++){
