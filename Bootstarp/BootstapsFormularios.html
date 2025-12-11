@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+<body>
+    <form class="p-4 bg-light">
+
+        <div class="row g-3">  <!-- El g-X solo sirve en row-->
+            <div class="col-12 col-md-6">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control is-valid"/>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label class="form-label">Cursos</label>
+                <select class="form-select">
+                    <option>DAW</option>
+                    <option>DAM</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label class="form-label">Número de teléfono</label>
+                <div class="input-group">
+                    <span class="input-group-text">+34</span>
+                    <input type="number" class="form-control is-invalid"/>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label class="form-label">Número de teléfono países</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <select class="form-select">
+                            <option>+34</option>
+                            <option>+12</option>
+                            <option>+573</option>
+                        </select>
+                    </span>
+                    <input type="number" class="form-control"/>
+                </div>
+            </div>
+
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"/>
+                <label class="form-label">Alumno</label>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-center gap-3">
+                <label class="form-labe">Contraseña</label>
+                <input type="password" class="form-control is-valid w-50"/>  <!-- Bootstap solo tiene valores de porcentajes de 25 en 25 (25% 50% 75% 100%)-->
+            </div>
+
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary w-100">Enviar</button>
+            </div>
+        
+        </div>
+    </form>
+
+</body>
+</html>

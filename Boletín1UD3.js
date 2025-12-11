@@ -507,8 +507,10 @@ Si el checkbox “Clonar” está marcado, las imágenes seleccionadas no se mov
 
 //1er apartado
 let contenedor1 = document.getElementById('cont1');
-let contenedor2 = document.getElementById('cont2')
-let contenedor3 = document.getElementById('cont3')
+let contenedor2 = document.getElementById('cont2');
+let contenedor3 = document.getElementById('cont3');
+
+let contenedores = document.getElementsByClassName('contenedor');
 
 pulsadorDeImagenes(contenedor1);
 pulsadorDeImagenes(contenedor2);
@@ -527,29 +529,22 @@ function pulsadorDeImagenes(contenedor){
 
 //2seg apartado
 
+function  borrarImagenesContenedor(contenedor){
+    for(let i = 1; i<contenedor.children.length;i++){
+        if(contenedor.children[i].classList.contains('seleccionado')){
+            contenedor.children[i].remove();
+            i--;
+        }
+    };
+}
+
 let bEliminar = document.getElementById('btnBorrar');
 
 bEliminar.onclick= function(){
     console.log(contenedor1.children.length)
-    for(let i = 1; i<contenedor1.children.length;i++){
-        if(contenedor1.children[i].classList.contains('seleccionado')){
-            contenedor1.children[i].remove();
-            i--;
-        }
-    };
-    for(let i = 1; i<contenedor2.children.length;i++){
-        if(contenedor2.children[i].classList.contains('seleccionado')){
-            contenedor2.children[i].remove();
-            i--;
-        }
-    };
-    for(let i = 1; i<contenedor3.children.length;i++){
-        if(contenedor3.children[i].classList.contains('seleccionado')){
-            contenedor3.children[i].remove();
-            i--;
-        }
-    };
-
+    borrarImagenesContenedor(contenedor1);
+    borrarImagenesContenedor(contenedor2);
+    borrarImagenesContenedor(contenedor3);
     
 };
 
@@ -557,3 +552,68 @@ bEliminar.onclick= function(){
 
 let bAplicar = document.getElementById('btnAplicar');
 
+let tImagenesContendores = []
+
+
+bAplicar.addEventListener('click',function(){
+
+    let posicion = document.getElementsByName('lugar');
+    let sitio = document.getElementsByName('sitio')
+    let clonar = document.getElementsByName('clonar')[0]
+    buscarImagenSeleccionada();
+
+//Saber en que contenedor se añadirá la imagen
+    let cont = ''
+
+    for(let s of sitio){
+        if(s.checked){
+            if(s.value == 'cont1'){
+                cont = contenedor1;
+            }else if(s.value == 'cont2'){
+                cont = contenedor2;
+            }
+            else{
+                cont = contenedor3;
+            }
+        }
+    }
+
+
+//Saber en que posicion se va a añdir la imagen
+    for(let i of posicion){
+        if(i.checked){
+            if(i.value == 'first'){
+                for(let img of tImagenesContendores){
+                    cont.children[1].before(img)
+                }
+            }else{
+                for(let img of tImagenesContendores){
+                    cont.append(img)
+                }
+            }
+        }
+    }
+    
+    if(clonar.checked){
+        tImagenesContendores = []
+        buscarImagenSeleccionada()
+        for(let img of tImagenesContendores){
+            cont.append(img)
+        }
+        
+    }
+
+});
+
+
+
+function buscarImagenSeleccionada(){
+    
+    for(let i = 0; i<contenedores.length -1;i++){
+        for(let x = 0; x<contenedores[i].children.length; x++){
+            if(contenedores[i].children[x].className == 'seleccionado'){
+                tImagenesContendores.push(contenedores[i].children[x]);
+            }
+        }
+    }   
+}
