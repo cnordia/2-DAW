@@ -145,7 +145,7 @@ class IngredienteNuveoView(CreateView):
     #fields = '__all__' No es necesario si le pasamos el ModelForm
     form_class = IngredienteModelForm
     template_name = 'app/nuevos_ingredientes.html'
-    succes_url = reverse_lazy('ingredientes_list')
+    success_url = reverse_lazy('ingredientes_list')
     #Se envia predefinidamente el formulario con la variable llamada {{form}}
 
 
@@ -153,4 +153,4 @@ class IngredienteEliminar(DeleteView):
     model = Ingrediente
     #fields = '__all__' No es necesario si le pasamos el ModelForm
     template_name = 'app/nuevos_ingredientes'
-    succes_url = reverse_lazy('ingredientes_list')
+    success_url = reverse_lazy('ingredientes_list')
