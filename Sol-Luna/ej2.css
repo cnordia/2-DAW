@@ -1,0 +1,79 @@
+@keyframes anim-luz{
+    0% {background-color: #00112B;}
+    100% {background-color: #DBFEFE;}
+} 
+
+@keyframes anim-astro-horiz{
+    from {left: 5%;}
+    to {left: 80%;}
+}
+
+@keyframes anim-astro-vert{
+    from {bottom: -350px;}
+    to {bottom: 425px;}
+}
+
+#ej2 {
+    height: 500px;
+    width: 100%;
+    border:black thin solid;
+}
+
+#animacion-cielo{
+	position: relative;
+	height: 500px;
+	overflow: hidden;
+	animation: anim-luz 20s ease-in-out -10s infinite alternate;
+}
+
+#agua{
+   position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-image: url('imagenes/agua1.png');
+    background-position: right bottom;
+    height:129px;
+    z-index: 1;
+}
+#sol{
+	position: absolute;
+	left: 45%;	
+	animation: anim-astro-horiz 20s linear 0s infinite alternate,anim-astro-vert 20s ease-in-out -10s infinite alternate;
+}
+
+
+
+#luna{
+	position: absolute;
+	left: 45%;
+	animation: anim-astro-horiz 20s linear -20s infinite alternate,anim-astro-vert 20s ease-in-out -30s infinite alternate;
+}
+
+#nube1{
+	position: absolute;
+	top: 50px;
+	animation: anim-nube-horiz 40s linear 0s infinite normal;
+}
+
+#nube2{
+	position: absolute;
+	top: 90px;
+	animation: anim-nube-horiz 35s linear -10s infinite normal;
+}
+
+#nube3{
+	position: absolute;
+	top: 0px;
+	animation: anim-nube-horiz 37s linear -18s infinite normal;
+}
+
+#nube4{
+	position: absolute;
+	top: 30px;
+	animation: anim-nube-horiz 36s linear -32s infinite normal;
+}
+
+@keyframes anim-nube-horiz{
+    from {left: -5%;}
+    to {left: 100%;}
+}

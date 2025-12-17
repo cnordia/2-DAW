@@ -1,0 +1,65 @@
+@keyframes cielo{
+    0%{
+        background-color: yellow;
+    }
+    100%{
+        background-color: blue;
+    }
+}
+
+#animacion-cielo{
+    animation: cielo 10s linear 2s infinite forwards ;
+    background-color:red;
+    width: 100%;
+    height: 500px;
+    overflow: hidden; /*Hace que los objetos hijos que esten fuera de 
+                        este nodoPadre no se vean ,a menos que la position sea absolute(respecto al <body>)*/
+
+}
+
+#agua{
+    background-color: blue;
+    position: relative;/*relative (posicion respecto al padre)*/
+    top:400px;
+    width: 100%;
+    height: 100px;
+    transition:all 2s ease;
+}
+/*transition: elemento duracion linear delay */
+
+#agua:hover{
+   height: 200px;
+   transform: translateX(-20px);
+}
+
+#nube1{
+    position: absolute;
+    animation: nube1 5s linear infinite alternate;
+}
+
+@keyframes nube1{
+    0%{
+        transform: translateX(-200px);
+    }
+
+    75%{
+        transform: translateX(600px);
+    }
+    /*Espera x segundos en esa posición*/
+    100%{
+        transform: translateX(600px);
+    }
+}
+
+#sol{
+    position: absolute; /*relavite*/
+	left: 45%;	
+	animation: anim-astro-horiz 20s linear 0s infinite alternate,anim-astro-vert 20s ease-in-out -10s infinite alternate;
+}
+
+@keyframes anim-astro-vert{
+    from {bottom: -350px;}
+    to {bottom: 425px;}
+}
+
+/*opacity:1 o 0 (visibilidad)*/
