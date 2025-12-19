@@ -1,0 +1,99 @@
+================================================================
+      GUIA MAESTRA: METODOS Y ESTRUCTURAS JS (CHEATSHEET)
+================================================================
+
+[1] ARRAYS (ARREGLOS)
+----------------------------------------------------------------
+IMPORTANTE: Diferenciar entre métodos que crean una copia nueva
+y métodos que modifican (mutan) el array original.
+
+A. METODOS DE BUSQUEDA (No modifican el original)
+   - includes(val) : ¿Existe el valor? -> Retorna true/false
+   - indexOf(val)  : ¿Dónde está? -> Retorna índice o -1
+   - find(func)    : Devuelve el PRIMER elemento que cumpla la condición.
+   - some(func)    : ¿ALGUNO cumple la condición? -> true/false
+   - every(func)   : ¿TODOS cumplen la condición? -> true/false
+
+B. TRANSFORMACION E ITERACION (¡Los más usados!)
+   - map(func)     : Crea un NUEVO array transformando cada elemento.
+                     Ej: [1,2].map(x => x*2) -> [2,4]
+   
+   - filter(func)  : Crea un NUEVO array con elementos que pasan el filtro.
+                     Ej: [1,10].filter(x => x > 5) -> [10]
+   
+   - reduce(func)  : Reduce todo el array a un único valor (suma, obj, etc).
+   
+   - forEach(func) : Bucle simple. NO devuelve nada, solo recorre.
+
+C. MODIFICACION (MUTAN el array original)
+   - push(v)       : Añade al final.
+   - pop()         : Elimina el último.
+   - shift()       : Elimina el primero.
+   - unshift(v)    : Añade al principio.
+   - splice(i, n)  : La navaja suiza. Elimina o inserta en cualquier posición.
+   - sort()        : Ordena (OJO: por defecto es alfabético).
+
+D. OTROS UTILES
+   - slice(ini, fin): Corta y devuelve una copia (No muta).
+   - join(sep)      : Convierte Array -> String. Ej: arr.join('-')
+
+
+----------------------------------------------------------------
+[2] STRINGS (CADENAS DE TEXTO)
+----------------------------------------------------------------
+IMPORTANTE: Los Strings son INMUTABLES. Ningún método cambia el
+texto original, siempre devuelven uno nuevo.
+
+A. BUSQUEDA Y COMPROBACION
+   - includes('txt')   : ¿Contiene el texto? -> true/false
+   - startsWith('txt') : ¿Empieza por...?
+   - indexOf('txt')    : Posición del texto (-1 si no está).
+
+B. CORTE Y EXTRACCION
+   - slice(ini, fin)   : Extrae una parte. Admite negativos (desde el final).
+   - split('sep')      : Convierte String -> Array.
+                         Ej: "hola mundo".split(" ") -> ["hola", "mundo"]
+   - trim()            : Limpia espacios en blanco (inicio y final).
+
+C. MODIFICACION (Retornan nueva cadena)
+   - replace(old, new) : Reemplaza la PRIMERA coincidencia.
+   - toUpperCase()     : Convierte a MAYUSCULAS.
+   - toLowerCase()     : Convierte a minusculas.
+
+
+----------------------------------------------------------------
+[3] OBJETOS (OBJECTS)
+----------------------------------------------------------------
+Útiles para iterar sobre las propiedades de un objeto.
+
+   - Object.keys(obj)   : Devuelve array de CLAVES (propiedades).
+                          Ej: ["nombre", "edad", "email"]
+                          
+   - Object.values(obj) : Devuelve array de VALORES.
+                          Ej: ["Ana", 25, "ana@test.com"]
+                          
+   - Object.entries(obj): Devuelve array de arrays [clave, valor].
+
+
+----------------------------------------------------------------
+[4] JSON (INTERCAMBIO DE DATOS)
+----------------------------------------------------------------
+Fundamental para APIs y localStorage.
+
+   - JSON.stringify(obj): Convierte Objeto JS -> String JSON (Texto plano).
+   - JSON.parse(str)    : Convierte String JSON -> Objeto JS (Utilizable).
+
+
+================================================================
+             RESUMEN RAPIDO: ¿QUE USO?
+================================================================
+
+| ACCION          | EN ARRAY (Arr)       | EN STRING (Str)     |
+|-----------------|----------------------|---------------------|
+| Buscar Posición | indexOf / findIndex  | indexOf / search    |
+| ¿Existe?        | includes / some      | includes            |
+| Cortar trozo    | slice                | slice               |
+| Cambiar formato | map / join           | split / toUpperCase |
+| Filtrar/Borrar  | filter               | replace             |
+| Recorrer        | forEach / for..of    | for..of             |
+| Longitud        | .length              | .length             |

@@ -1,0 +1,209 @@
+================================================================
+   APUNTES DE ESTUDIO: DESARROLLO WEB CLIENTE (JS) - EXAMEN
+================================================================
+
+----------------------------------------------------------------
+2.1 FORMULARIOS EN EL DOM
+----------------------------------------------------------------
+El navegador organiza los formularios en una estructura jerárquica.
+
+[1] ACCESO A FORMULARIOS
+------------------------
+Existen dos formas principales de acceder a la etiqueta <form>:
+
+A. Por ID o Selector (Forma Moderna):
+   const form = document.getElementById('miForm');
+   const form = document.querySelector('#miForm');
+
+B. Colección document.forms (Forma Clásica):
+   document.forms[0];            // Primer formulario del documento
+   document.forms['nombreForm']; // Acceso por el atributo name=""
+
+[2] ACCESO A ELEMENTOS DEL FORMULARIO
+-------------------------------------
+Una vez capturado el formulario, accedemos a sus controles (inputs, selects, buttons).
+
+- Colección .elements:
+  const emailInput = formulario.elements.email; // Accede al input name="email"
+
+- Propiedades clave de los controles:
+  .value     -> Obtiene o define el texto escrito.
+  .checked   -> true/false (para Checkbox y Radio).
+  .type      -> Tipo de input (text, password, etc.).
+  .disabled  -> true para desactivar el campo.
+
+
+----------------------------------------------------------------
+2.2 EVENTOS
+----------------------------------------------------------------
+Los eventos permiten ejecutar código cuando ocurre una acción.
+
+[1] MANEJO DE EVENTOS (Event Listeners)
+---------------------------------------
+Sintaxis estándar:
+elemento.addEventListener('tipo_evento', callback);
+
+Eventos comunes:
+- click            (al pulsar ratón)
+- submit           (al enviar formulario)
+- input            (al escribir, en tiempo real)
+- change           (al confirmar cambio o perder foco)
+- DOMContentLoaded (cuando el HTML ha cargado)
+
+[2] EL OBJETO EVENTO (e)
+------------------------
+El navegador pasa automáticamente un objeto con detalles a la función callback.
+
+- e.target:        El elemento exacto donde ocurrió el evento.
+- e.currentTarget: El elemento que tiene el listener asignado.
+
+[3] FLUJO: PROPAGACIÓN Y CAPTURA
+--------------------------------
+El evento viaja por el DOM en tres fases:
+1. Captura:  Baja desde window hasta el objetivo.
+2. Objetivo: Llega al elemento.
+3. Burbujeo (Bubbling): Sube desde el objetivo hasta window (Por defecto).
+
+Métodos de control:
+- e.stopPropagation(): Detiene el burbujeo (el evento no sube a los padres).
+- e.preventDefault():  Evita la acción nativa (ej: evita que submit recargue la página).
+
+[4] DELEGACIÓN DE EVENTOS
+-------------------------
+Técnica de optimización: poner un solo listener en el padre para manejar muchos hijos.
+Ejemplo: Poner el click en <ul> para detectar clicks en los <li> usando e.target.
+
+
+----------------------------------------------------------------
+2.3 EXPRESIONES REGULARES (RegExp) - TEMA CLAVE
+----------------------------------------------------------------
+Patrones para búsqueda y validación de texto.
+
+[1] CREACIÓN
+------------
+- Literal:     const regex = /patrón/banderas;
+- Constructor: const regex = new RegExp('patrón', 'banderas');
+
+[2] BANDERAS (FLAGS)
+--------------------
+- i : Insensitive (Ignora mayúsculas/minúsculas).
+- g : Global (Busca todas las coincidencias).
+- m : Multiline (Inicio ^ y fin $ afectan a cada línea).
+
+[3] SINTAXIS BÁSICA (CHEATSHEET)
+--------------------------------
+^        : Inicio de cadena.
+$        : Fin de cadena.
+.        : Cualquier carácter (salvo salto de línea).
+\d       : Dígito [0-9].
+\w       : Alfanumérico [A-Za-z0-9_].
+\s       : Espacio en blanco.
+* : 0 o más veces.
++        : 1 o más veces.
+?        : 0 o 1 vez (Opcional).
+{n,m}    : Entre n y m veces.
+[...]    : Lista permitida (ej: [aeiou]).
+[^...]   : Negación (ej: [^0-9] nada que sea número).
+
+[4] MÉTODOS PRINCIPALES
+-----------------------
+- regex.test(texto) : Devuelve true/false. (VALIDACIÓN).
+- texto.match(regex): Devuelve array con coincidencias.
+- texto.replace(regex, nuevo): Reemplaza texto.
+
+
+----------------------------------------------------------------
+PROFUNDIZACIÓN: VALIDACIÓN DE CONTRASEÑAS (LOOKAHEADS)
+----------------------------------------------------------------
+Para validar reglas complejas (ej: "debe contener una mayúscula") sin importar el orden,
+se usan los "Lookaheads Positivos": (?=...)
+Concepto: Mira adelante para ver si existe el patrón, pero NO consume caracteres
+y vuelve al inicio para comprobar la siguiente condición.
+
+[NIVEL 1] Contraseña Básica
+Requisito: 6 a 12 caracteres alfanuméricos.
+Regex: /^[a-zA-Z0-9]{6,12}$/
+
+[NIVEL 2] Contraseña Media
+Requisito: Mínimo 8 caracteres y al menos un número.
+Regex: /^(?=.*\d).{8,}$/
+Explicación:
+  (?=.*\d) -> ¿Hay un número en algún sitio?
+  .{8,}    -> Si sí, valida que haya 8 o más caracteres.
+
+[NIVEL 3] Contraseña Fuerte (Estándar)
+Requisito: Mínimo 8 chars, 1 minúscula, 1 mayúscula, 1 número.
+Regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
+
+[NIVEL 4] Contraseña Ultra Segura
+Requisito: Todo lo anterior + 1 carácter especial ($@$!%*?&).
+Regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&]).{8,}$/
+
+EJEMPLO DE CÓDIGO JS:
+function validar(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return regex.test(password); // Devuelve true o false
+}
+
+
+
+🟢 ¿Qué son los paréntesis () en Expresiones Regulares?
+En el mundo de las RegExp, los paréntesis tienen dos funciones principales: Agrupar y Capturar.
+
+1. Agrupar (Para aplicar lógica a un bloque)
+Sirven para tratar varios caracteres como una única unidad. Es vital cuando usas cuantificadores (como *, + o ?).
+
+Sin paréntesis: ab+
+
+Significa: una "a" seguida de una o más "b".
+
+Coincide con: "ab", "abb", "abbb".
+
+Con paréntesis: (ab)+
+
+Significa: el grupo "ab" repetido una o más veces.
+
+Coincide con: "ab", "abab", "ababab".
+
+2. Capturar (Extracción de datos)
+Esta es la función más potente en JavaScript. Lo que pongas entre paréntesis se guarda en una memoria temporal. Cuando usas .exec() o .match(), JavaScript te devuelve un array donde:
+
+Posición [0]: La coincidencia completa.
+
+Posición [1]: Lo que había dentro del primer paréntesis ( ).
+
+Posición [2]: Lo que había dentro del segundo paréntesis ( ).
+
+Ejemplo visual: Imaginas que quieres validar una fecha y además extraer el día, el mes y el año por separado.
+
+const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+//              ^^^^^   ^^^^^   ^^^^^
+//             Grupo 1 Grupo 2 Grupo 3
+
+
+
+Ejemplo 1: Validar y extraer partes de una Fecha (DD/MM/AAAA)
+Objetivo: Validar formato y separar día, mes y año.
+
+JavaScript
+
+// Explicación:
+// ^      -> Inicio
+// (\d{2})-> Grupo 1: Dos dígitos (Día)
+// \/     -> La barra literal (hay que escaparla con contrabarra)
+// (\d{2})-> Grupo 2: Dos dígitos (Mes)
+// \/     -> Barra literal
+// (\d{4})-> Grupo 3: Cuatro dígitos (Año)
+// $      -> Fin
+
+const regexFecha = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+const fecha = "25/12/2023";
+
+const resultado = regexFecha.exec(fecha);
+
+if (resultado) {
+    console.log("Fecha válida");
+    console.log("Día:", resultado[1]); // "25"
+    console.log("Mes:", resultado[2]); // "12"
+    console.log("Año:", resultado[3]); // "2023"
+}

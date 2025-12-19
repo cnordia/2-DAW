@@ -1,0 +1,177 @@
+================================================================
+   GUIA DE ESTUDIO: DOM (DOCUMENT OBJECT MODEL) Y SELECTORES
+================================================================
+
+----------------------------------------------------------------
+2. SELECCIÓN DE ELEMENTOS (ACCEDER AL DOM)
+----------------------------------------------------------------
+Métodos para "agarrar" elementos del HTML.
+
+A. MÉTODOS MODERNOS (Recomendados - Usan sintaxis CSS)
+   - document.querySelector('css')   : Devuelve el PRIMER elemento encontrado.
+   - document.querySelectorAll('css'): Devuelve una NodeList (Colección) 
+                                       con TODOS los encontrados.
+
+B. MÉTODOS CLÁSICOS (Más rápidos, pero menos flexibles)
+   - document.getElementById('id')      : Busca por ID único.
+   - document.getElementsByClassName('clase') : Devuelve colección (HTMLCollection).
+   - document.getElementsByTagName('div')     : Devuelve colección por etiqueta.
+
+
+----------------------------------------------------------------
+3. SELECTORES CSS (PARA QUERYSELECTOR)
+----------------------------------------------------------------
+Sintaxis necesaria para usar querySelector.
+
+[BASICOS]
+* : Selector Universal (todos).
+#id           : Por ID.
+.clase        : Por Clase.
+div           : Por etiqueta.
+
+[RELACIONALES]
+div p         : Descendiente (cualquier <p> dentro de un <div>).
+div > p       : Hijo directo (solo el <p> que es hijo inmediato).
+div + p       : Hermano adyacente (el <p> que va justo después del <div>).
+div ~ p       : Hermano general (cualquier <p> después del <div> al mismo nivel).
+
+[ATRIBUTOS]
+[type="text"] : Input de tipo texto.
+a[href^="https"] : Enlace que EMPIEZA por https.
+img[src$=".png"] : Imagen que TERMINA en .png.
+
+
+----------------------------------------------------------------
+4. MANIPULACIÓN DE ELEMENTOS (HTML DOM ELEMENTS)
+----------------------------------------------------------------
+Una vez seleccionado el elemento (const el = ...), ¿qué hacemos?
+
+A. CONTENIDO
+   - el.innerHTML   : Lee/Escribe el HTML interno (interpreta etiquetas).
+                      ¡CUIDADO CON XSS (Seguridad)!
+   - el.textContent : Lee/Escribe solo el TEXTO (ignora etiquetas, es seguro).
+   - el.innerText   : Similar a textContent, pero respeta el estilo CSS 
+                      (ej: no devuelve texto oculto con display:none).
+
+B. CLASES (Gestión de estilos CSS) - ¡Vital!
+   Usa la propiedad .classList (es mucho mejor que .className).
+   
+   - el.classList.add('activa')    : Añade clase.
+   - el.classList.remove('activa') : Quita clase.
+   - el.classList.toggle('activa') : Si está la quita, si no, la pone.
+   - el.classList.contains('activa'): Devuelve true/false.
+
+C. ATRIBUTOS
+   - el.getAttribute('src')        : Obtiene valor.
+   - el.setAttribute('src', 'x.jpg'): Cambia valor.
+   - el.removeAttribute('src')     : Borra atributo.
+   * Acceso directo: el.id, el.src, el.value (para inputs).
+
+
+----------------------------------------------------------------
+5. HTML DOM STYLE OBJECT (ESTILOS EN LÍNEA)
+----------------------------------------------------------------
+Modifica el atributo "style" del HTML. Tiene mayor especificidad que el CSS.
+
+SINTAXIS: camelCase (Joroba de camello).
+CSS: background-color  ->  JS: style.backgroundColor
+CSS: margin-top        ->  JS: style.marginTop
+CSS: font-size         ->  JS: style.fontSize
+
+Ejemplo:
+elemento.style.color = "red";
+elemento.style.display = "none"; // Ocultar elemento
+
+
+----------------------------------------------------------------
+6. NAVEGACIÓN POR EL ARBOL (DOM TRAVERSAL)
+----------------------------------------------------------------
+Moverse desde un elemento a sus familiares.
+
+- Padres:
+  el.parentElement  : El padre directo.
+  el.closest('div') : El ancestro más cercano que cumpla el selector.
+
+- Hijos:
+  el.children       : Colección de hijos (solo elementos HTML).
+  el.firstElementChild : Primer hijo.
+  el.lastElementChild  : Último hijo.
+
+- Hermanos:
+  el.nextElementSibling     : El siguiente hermano.
+  el.previousElementSibling : El hermano anterior.
+
+
+----------------------------------------------------------------
+7. CREACIÓN Y ELIMINACIÓN (DOCUMENT METHODS)
+----------------------------------------------------------------
+Ciclo de vida de elementos dinámicos.
+
+PASO 1: CREAR
+const nuevoDiv = document.createElement('div');
+
+PASO 2: RELLENAR
+nuevoDiv.textContent = "Soy nuevo";
+
+PASO 3: INSERTAR (¡Si no lo insertas, no sale en pantalla!)
+padre.appendChild(nuevoDiv);  // Añade al final del padre.
+padre.prepend(nuevoDiv);      // Añade al principio del padre.
+
+ELIMINAR:
+elemento.remove();            // Se borra a sí mismo.
+padre.removeChild(hijo);      // Forma antigua.
+
+----------------------------------------------------------------
+CLONAR UN ELEMENTO
+----------------------------------------------------------------
+
+Para clonar un elemento HTML existente (hacer una copia exacta) se utiliza el método .cloneNode().
+
+Aquí tienes la explicación detallada y, al final, el bloque formateado para tus apuntes .txt.
+
+¿Cómo funciona?
+El método acepta un parámetro booleano (true/false) que es vital:
+
+elemento.cloneNode(true) (Clonación Profunda / Deep): Copia el elemento, sus atributos y todo su contenido (texto y otros hijos que tenga dentro).
+
+elemento.cloneNode(false) (Clonación Superficial / Shallow): Copia solo la etiqueta y sus atributos. El interior queda vacío.
+
+// 1. Capturamos el elemento original
+const original = document.querySelector('#caja');
+
+// 2. Creamos el clon (TRUE para que copie el texto de dentro)
+const copia = original.cloneNode(true);
+
+// 3. ¡IMPORTANTE! Cambiar el ID para no tener duplicados
+copia.id = 'caja-copia';
+
+// 4. Lo insertamos en el documento (si no, se queda en el limbo)
+document.body.appendChild(copia);
+
+----------------------------------------------------------------
+Método para duplicar nodos existentes.
+
+SINTAXIS:
+const clon = elementoOriginal.cloneNode(profundidad);
+
+TIPOS DE CLONADO (Parámetro booleano):
+1. cloneNode(true)  : DEEP (Profundo). Copia la etiqueta, atributos
+                      y TODO el contenido (hijos + texto).
+                      
+2. cloneNode(false) : SHALLOW (Superficial). Copia SOLO la etiqueta
+                      y atributos. El interior queda vacío.
+
+[!] PRECAUCIONES IMPORTANTES:
+A. IDs DUPLICADOS:
+   El clon mantiene el id del original. DEBES cambiarlo manualmente
+   antes de insertar el clon para evitar errores de validación.
+   Ej: clon.id = "nuevo-id";
+
+B. EVENTOS (addEventListener):
+   cloneNode() NO COPIA los listeners de JS.
+   Si el original tenía un evento click, el clon nace "sordo".
+   Debes volver a asignarle los eventos.
+
+C. INSERCIÓN:
+   El clon se crea en memoria. Tienes que usar appendChild() o
+   prepend() para que aparezca en la página.
