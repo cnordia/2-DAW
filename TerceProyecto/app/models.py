@@ -44,3 +44,9 @@ class IngredienteReceta(models.Model):
     cantidad = models.IntegerField(max_length=10)
     medida = models.CharField(choices=Medidas.choices, max_length=2)
 
+from django.contrib.auth.models import AbstractUser
+
+class Persona(AbstractUser):
+    nombre = models.CharField(max_length=70)
+    edad = models.PositiveIntegerField(null=True, blank=True)
+    telefono = models.IntegerField()

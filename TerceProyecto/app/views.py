@@ -15,7 +15,6 @@ def ingredientes_list(request):
     categorias = CategoriaIngrediente.objects.all()
 
     if not 'reset' in request.GET:
-        
 
         cat_selecionada = request.GET.get('categoria') 
 
@@ -134,6 +133,34 @@ class IngredienteListView(ListView):
     model = Ingrediente
     template_name = 'app/ingredientes.html'
     context_object_name = 'ingredientes'
+
+    #Sirve para hacer una consulta de los datos obtenidos (un filtro)
+    def get_queryset(self):
+        #Esto equivale a hacer un .object.all
+        queryset = super().get_queryset()
+
+        #ESto  nos sirve para obtener el valor del GET con lo que el usuario va a poner en el filtro
+        nombre_filtrado = self.request.GET.get('nombre')
+        categoria_filtrado = self.request.GET.get('categoria')
+        refrigerado_filtrado = self.request.GET.get('refrigerado')
+
+        #En cada if comprobamos que tenga contenido y si es así hará el filtro
+        if nombre_filtrado:
+            queryset = queryset.filter(nombre = nombre_filtrado)
+        if refrigerado_filtrado:
+            queryset = queryset.filter(refrigerado = True)
+        if categoria_filtrado:
+            queryset = queryset.filter(categoria = categoria_filtrado)
+        
+        #Devolvemos la lista que ha pasado de tener todos los ingredientes a pasar por uno o varios filtros y tener los que han pasado este filtro
+        return queryset
+    
+    #
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        print ('////////////////////////',contexto)
+        contexto['categorias'] = CategoriaIngrediente.objects.all()
+        return contexto
 
 class IngredienteDetallesView(DetailView):
     model = Ingrediente

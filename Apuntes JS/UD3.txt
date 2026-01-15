@@ -175,3 +175,48 @@ B. EVENTOS (addEventListener):
 C. INSERCIÓN:
    El clon se crea en memoria. Tienes que usar appendChild() o
    prepend() para que aparezca en la página.
+
+----------------------------------------------------------------
+9. MÉTODOS DE INSERCIÓN Y POSICIONAMIENTO
+----------------------------------------------------------------
+¿Dónde colocamos el elemento creado? Diferencia entre métodos
+modernos (más fáciles) y clásicos.
+
+[A] DENTRO DEL PADRE (Gestión de Hijos)
+---------------------------------------
+1. padre.append(el)     : Añade al FINAL.
+   - Ventaja: Admite varios argumentos y texto directo.
+   - Ej: div.append(p, "Hola");
+   
+2. padre.prepend(el)    : Añade al PRINCIPIO (antes del primer hijo).
+   - Ej: lista.prepend(nuevoLi);
+
+3. padre.appendChild(el): (CLÁSICO) Añade al FINAL.
+   - Desventaja: Solo admite un nodo (no texto, no varios).
+   - Ventaja: Devuelve el elemento insertado (append no devuelve nada).
+
+[B] AL LADO DEL ELEMENTO (Gestión de Hermanos - Moderno)
+--------------------------------------------------------
+Estos métodos se aplican sobre el elemento referencia, NO sobre el padre.
+
+1. elemento.before(nuevo) : Lo pone justo ANTES (fuera del elemento).
+2. elemento.after(nuevo)  : Lo pone justo DESPUÉS (fuera del elemento).
+
+[C] INSERCIÓN PRECISA (El método clásico "InsertBefore")
+--------------------------------------------------------
+Fundamental para exámenes antiguos o compatibilidad total.
+SINTAXIS:
+   padre.insertBefore(nuevoNodo, nodoReferencia);
+
+- nuevoNodo     : El que quieres meter.
+- nodoReferencia: El hijo existente ANTES del cual quieres insertar.
+
+TRUCO: Si nodoReferencia es null, actúa como appendChild (va al final).
+
+----------------------------------------------------------------
+RESUMEN: ¿CUÁL USO?
+----------------------------------------------------------------
+- ¿Al final de la lista?    -> padre.append()
+- ¿Al principio de la lista?-> padre.prepend()
+- ¿Delante de un hermano?   -> hermano.before()  o  padre.insertBefore()
+- ¿Detrás de un hermano?    -> hermano.after()

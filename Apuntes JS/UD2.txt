@@ -145,6 +145,27 @@ function validar(password) {
     return regex.test(password); // Devuelve true o false
 }
 
+----------------------------------------------------------------
+ANEXO: EXPLICACIÓN DE (?=.*...)
+----------------------------------------------------------------
+¿Por qué siempre ponemos .* dentro del paréntesis?
+Ejemplo: (?=.*\d)
+
+- (?= ) : "Comprueba esto y vuelve al inicio".
+- .* : "Permite que haya CUALQUIER COSA antes".
+
+TRADUCCIÓN HUMANA:
+(?=\d)   -> "El texto DEBE EMPEZAR por un número".
+(?=.*\d) -> "El texto DEBE CONTENER un número (donde sea)".
+
+Sin el ".*", la validación sería estricta posicionalmente.
+Con el ".*", buscamos la existencia del carácter en cualquier parte.
+
+
+
+Si quieres buscar un punto literal (ej: google**.**com), tienes que "matar" su magia: \.
+
+Ejemplo: /google.com/ acepta "googleAcom", pero /google\.com/ solo acepta google.com
 
 
 🟢 ¿Qué son los paréntesis () en Expresiones Regulares?
