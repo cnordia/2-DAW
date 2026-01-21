@@ -1,11 +1,54 @@
 {% extends 'app/base.html'%}
 
 {% block content %}
+    <h2>Menú de Compra</h2>
 
-    <ul>
-        {% for producto in productos %}
-            <li>{{producto}}</li>
-        {% endfor %}
-    </ul>
+    <form method="get" action="">
+
+        <label for="nombre"></label>
+        <input type="text" name="nombre">
+
+        <select name="modelo">
+            <option value="-" selected>-</option>
+
+
+            <!-- |dictsort:"campo": Es un filtro. Reordena la lista en el momento (solo para ese bucle) basándose en el campo que le digas entre comillas.
+
+            {% ifchanged variable %}: Es una etiqueta lógica. Solo muestra el contenido si la variable que está evaluando es distinta a la de la vuelta anterior del bucle. -->
+
+            {% for producto in productos|dictsort:'modelo' %}
+                {% ifchanged producto.modelo %}
+                    <option value="{{producto.modelo}}">{{producto.modelo}}</option>
+                {% endifchanged %}
+            {% endfor %}
+        </select>
+
+        <label for="precio"></label>
+        <input type="number" name="precio">
+
+        <label for="vip"></label>
+        <input type="checkbox" name="vip">
+
+        <select name="marca">
+            <option value="-" selected>-</option>
+
+            {% for producto in productos|dictsort:'marca' %}
+                {% ifchanged producto.marca %}
+                    <option value="{{producto.marca}}">{{producto.marca}}</option>
+                {% endifchanged %}
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Filtrar">
+
+        <input type="reset" value="Quitar Filtro">
+
+    </form>
+
+    {% for producto in productos %}
+        <p>{{producto}}</p>
+        <a href="#">Comprar</a>
+    {% endfor %}
+
 
 {% endblock %}
