@@ -22,7 +22,7 @@ class Usuario(models.Model):
 
 class Compra(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fecha = models.DateField(auto_now_add=True)
     unidades = models.IntegerField(validators=[MinValueValidator(0)])
     importe = models.DecimalField(validators=[MinValueValidator(0.00)], decimal_places=2, max_digits=6)
     iva = models.DecimalField(validators=[MaxValueValidator(100.00)], max_digits=5, decimal_places=2)

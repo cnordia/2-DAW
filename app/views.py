@@ -4,6 +4,8 @@ from .models import *
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required  #Al ser un decorator solo funciona en funciones
 from django.contrib.auth.mixins import LoginRequiredMixin #Se implementa como herencia a las clases que lo vayan a usar
+from .forms import *
+
 # Create your views here.
 
 class ProductoListView(ListView):
@@ -69,3 +71,25 @@ class ProductoCompraListView(ListView):
         
         #Devolvemos la lista que ha pasado por uno o varios filtros
         return queryset
+    
+
+
+def checkout(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+
+    if request.method == 'POST':
+        form = CheckoutModelForm(request.POST)
+        if form.is_valid():
+            compra = form.save(commit=False)
+
+            com
+
+
+
+    else:
+        form = CheckoutModelForm()
+
+
+
+    contexto = {'producto':producto, 'form':form}
+    return render(request, 'app/compra_producto.html',contexto)

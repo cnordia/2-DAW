@@ -1,0 +1,18 @@
+{% extends 'app/base.html'%}
+
+{% block content %}
+    <p>asdad</p>
+    <h2>{{compra.producto}}</h2>
+    <h2>Finalizar Compra</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Confirmar Compra</button>
+        <a href="{% url 'productos' %}">Cancelar</a>
+    </form>
+
+
+{% endblock %}

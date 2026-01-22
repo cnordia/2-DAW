@@ -14,7 +14,7 @@
 
             <!-- |dictsort:"campo": Es un filtro. Reordena la lista en el momento (solo para ese bucle) basándose en el campo que le digas entre comillas.
 
-            {% ifchanged variable %}: Es una etiqueta lógica. Solo muestra el contenido si la variable que está evaluando es distinta a la de la vuelta anterior del bucle. -->
+             ifchanged variable : Es una etiqueta lógica. Solo muestra el contenido si la variable que está evaluando es distinta a la de la vuelta anterior del bucle. -->
 
             {% for producto in productos|dictsort:'modelo' %}
                 {% ifchanged producto.modelo %}
@@ -46,8 +46,10 @@
     </form>
 
     {% for producto in productos %}
-        <p>{{producto}}</p>
-        <a href="#">Comprar</a>
+        <div>   
+            <p>{{producto}}</p>
+            <a href="{% url 'compra_producto' producto.pk%}">Comprar</a>
+        </div>
     {% endfor %}
 
 
