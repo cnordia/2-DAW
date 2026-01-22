@@ -46,7 +46,7 @@ class IngredienteReceta(models.Model):
 
 from django.contrib.auth.models import AbstractUser
 
-class Persona(AbstractUser):
-    nombre = models.CharField(max_length=70)
-    edad = models.PositiveIntegerField(null=True, blank=True)
-    telefono = models.IntegerField()
+# class Persona(AbstractUser):
+#     nombre = models.CharField(max_length=70)
+#     edad = models.PositiveIntegerField(null=True, blank=True)
+#     telefono = models.IntegerField()

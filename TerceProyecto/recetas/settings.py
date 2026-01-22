@@ -123,4 +123,4 @@ STATIC_ROOT = BASE_DIR / 'satic'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'app.Persona'
+# AUTH_USER_MODEL = 'app.Persona'

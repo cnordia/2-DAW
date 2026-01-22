@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.forms import formset_factory, modelformset_factory
 from .form import *
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.urls import reverse_lazy
 
+from django.contrib import messages
 # Create your views here.
 
 def inicio(request):
@@ -100,22 +103,30 @@ def relaciones(request):
 
     return render(request, 'app/relaciones.html', {'recetas':recetas, 'ingredientes':ingredientes})
 
-def receta(request, pk):
-    receta = get_object_or_404(Receta, pk=pk)
-    ingredientes = Ingrediente.objects.all()
+# def receta(request, pk):
+#     receta = get_object_or_404(Receta, pk=pk)
+#     ingredientes = Ingrediente.objects.all()
 
-    if request.method == 'POST':
-        formulario = IngredienteRecetaModelForm(request.POST)
-        if formulario.is_valid():
-            formulario.instance.receta= receta
-            formulario.save()
-            return redirect('receta', pk=pk)
+#     if request.method == 'POST':
+#         formulario = IngredienteRecetaModelForm(request.POST)
+#         if formulario.is_valid():
+#             formulario.instance.receta= receta
+#             formulario.save()
+#             return redirect('receta', pk=pk)
     
-    else:
-        formulario = IngredienteRecetaModelForm()
+#     else:
+#         formulario = IngredienteRecetaModelForm()
 
-    contexto = {'receta':receta, 'ingredientes':ingredientes, 'formulario':formulario}
-    return render(request, 'app/receta.html', contexto)
+#     contexto = {'receta':receta, 'ingredientes':ingredientes, 'formulario':formulario}
+#     return render(request, 'app/receta.html', contexto)
+
+class RecetasListView(ListView):
+    model = Receta
+    template_name = 'app/recetas.html'
+    context_object_name = 'recetas'
+    paginate_by = 2
+    success_url = reverse_lazy('ingredientes')
+    succes_message =  'Mensaje de prueba'
     
 
 def receta_eliminar_ingrediente(request, receta_pk, ingrediente_pk):
@@ -126,13 +137,13 @@ def receta_eliminar_ingrediente(request, receta_pk, ingrediente_pk):
 
     return redirect('receta', pk= receta_pk)
 
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
-from django.urls import reverse_lazy
+
 
 class IngredienteListView(ListView):
     model = Ingrediente
     template_name = 'app/ingredientes.html'
     context_object_name = 'ingredientes'
+    paginate_by = 3
 
     #Sirve para hacer una consulta de los datos obtenidos (un filtro)
     def get_queryset(self):
@@ -143,15 +154,21 @@ class IngredienteListView(ListView):
         nombre_filtrado = self.request.GET.get('nombre')
         categoria_filtrado = self.request.GET.get('categoria')
         refrigerado_filtrado = self.request.GET.get('refrigerado')
+        boton_reset = self.request.GET.get('reset')
 
         #En cada if comprobamos que tenga contenido y si es así hará el filtro
-        if nombre_filtrado:
+
+        if boton_reset:
+            return queryset
+
+        if nombre_filtrado and nombre_filtrado != '-':
             queryset = queryset.filter(nombre = nombre_filtrado)
         if refrigerado_filtrado:
             queryset = queryset.filter(refrigerado = True)
         if categoria_filtrado:
             queryset = queryset.filter(categoria = categoria_filtrado)
-        
+
+
         #Devolvemos la lista que ha pasado de tener todos los ingredientes a pasar por uno o varios filtros y tener los que han pasado este filtro
         return queryset
     
@@ -181,3 +198,4 @@ class IngredienteEliminar(DeleteView):
     #fields = '__all__' No es necesario si le pasamos el ModelForm
     template_name = 'app/nuevos_ingredientes'
     success_url = reverse_lazy('ingredientes_list')
+

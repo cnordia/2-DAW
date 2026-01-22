@@ -1,0 +1,31 @@
+<p>{{title}}</p>
+
+<strong>Empleado Estrella</strong>
+
+<ul>
+    <li>Nombre: {{empleado.nombre}}</li>
+    <li>Edad: {{empleado.edad}}</li>
+</ul>
+
+<strong>Trabajadores</strong>
+
+<ul>
+    <li>Nombre: {{totalEmpleados[0].nombre}}</li>
+</ul>
+
+<hr>
+
+<strong>Trabajadores Externos e internos</strong>
+
+<ul>
+    @if (trabajadorExterno){
+        <button (click)="cambiarExterno(false)">Mostrar internos</button>
+    <li>Nombre: {{empleadoExt.nombre}}</li>
+    }
+    @else {
+        <button (click)="cambiarExterno(true)">Mostrar externos</button>
+        @for ( empleado of totalEmpleados; track empleado.nombre;let index = $index){
+        <li>Empleado {{index+1}}: {{empleado.nombre}}</li>
+        }
+    }
+</ul>

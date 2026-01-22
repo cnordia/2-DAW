@@ -1,0 +1,32 @@
+<hr>
+
+<strong>Alummno Estrella</strong>
+
+<!-- <ul>
+    <li>Nombre: {{alumno.nombre}}</li>
+    <li>Apellidos: {{alumno.apellidos}}</li>
+</ul> -->
+
+<strong>Alumnos</strong>
+
+<ul>
+    @for(alumno of totalAlumnos; track alumno.nombre){
+        <li>Nombre: {{alumno.nombre}}</li>
+    }
+</ul>
+
+<hr>
+
+<strong>Alumnos de 1 y 2</strong>
+
+<ul>
+    @if (clasePrimero){
+        <button (click)="cambiarClase(false)">Mostrar Alumnos de Primero</button>
+    <li>Nombre: {{alumnoPrimero.nombre}}</li>
+    }
+    @else {
+        <button (click)="cambiarClase(true)">Mostrar Alumnso de Segundo</button>
+        <li>Nombre: {{alumnoSegundo.nombre}}</li>
+
+    }
+</ul>
