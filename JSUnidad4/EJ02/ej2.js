@@ -1,5 +1,2 @@
-const ToogleButton = (text) => ({  // Después del operador => es lo que devuelve ('el return')
-    id: 1,
-})
-
-console.log(ToogleButton('hola'))
+const ToggleButton = (texto) => '<p>' + texto + '</p>';
+document.getElementsByTagName('body')[0].innerHTML = ToggleButton('Hola Caracola');

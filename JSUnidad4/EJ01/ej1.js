@@ -1,4 +1,2 @@
-const saludar = (nomb)=>{
-    ('Hola ' + nomb)
-}
-console.log(saludar('paco'))
+const saludar = (nombre) => 'Hola ' + nombre;  //No necesaria las llaves al tener solo un valor IMPORTANTE no usar llaves {}, ya que si hacemos uso de estas necesitaremos implementar el return 
+console.log(saludar('Pepe'));
