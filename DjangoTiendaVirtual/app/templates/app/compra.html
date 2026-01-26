@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h2>Catálogo de Compra</h2>
+    
+    <form method="get" class="mb-4 d-flex">
+        <input type="text" name="q" class="form-control me-2" placeholder="Buscar por nombre o marca..." value="{{ request.GET.q }}">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <div class="row">
+        {% for prod in productos %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ prod.nombre }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ prod.marca }}</h6>
+                    <p class="card-text">
+                        Precio: <strong>{{ prod.precio }} €</strong><br>
+                        Disponibles: {{ prod.unidades }}
+                    </p>
+                    <a href="{% url 'checkout' prod.pk %}" class="btn btn-success">Comprar</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p>No se encontraron productos.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
