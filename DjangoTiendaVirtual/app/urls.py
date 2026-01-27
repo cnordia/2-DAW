@@ -1,8 +1,5 @@
 from django.urls import path
-from .views import (
-    ProductoListView, ProductoCreateView, ProductoUpdateView, ProductoDeleteView,
-    CompraListView, CheckoutView
-)
+from .views import *
 
 urlpatterns = [
     # CRUD Gestión
@@ -13,5 +10,13 @@ urlpatterns = [
 
     # Compra
     path('compra/', CompraListView.as_view(), name='compra'),
-    path('checkout/<int:pk>/', CheckoutView.as_view(), name='checkout'),
+    path('checkout/<int:pk>/', checkout, name='checkout'),
+
+    #Informes
+    path('informes/', InformesListView.as_view(), name='informes'),
+
+    #Login
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
+
 ]

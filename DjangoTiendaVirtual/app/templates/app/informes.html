@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h2>Informes</h2>
+    
+    <h4>Filtros</h4>
+    <form action="" method="post">
+        <select name="marca">
+            {% for marca in lista_marcas %}
+                <option>{{marca}}</option>
+            {% endfor %}
+        </select>
+
+    </form>
+
+    <hr>
+
+    <h4>Resultados</h4>
+    {% for producto in productos %}
+        <p>{{producto}}</p>
+    {% endfor %}
+
+{% endblock %}
